@@ -100,18 +100,18 @@ public class JModelFrame extends JFrame {
    private JWindow                  splashScreen    = null;
    private JWindow                  loadingScreen   = null;
 
-  // constructor
-  public JModelFrame() {
-             super("EORGANISM MetaModel :: Enterprise Architecture :: Main");
-  }// end constructor JModelFrame
+    // constructor
+    public JModelFrame() {
+               super("EORGANISM MetaModel :: Enterprise Architecture :: Main");
+    }// end constructor JModelFrame
 
     public JFrame getFrame() {return frame;}
 
     public void initialize(){
-                  // new menus and actions
-                  enterpriseMenu 		 = new JMenu();
+                    // new menus and actions
+                    enterpriseMenu 		 = new JMenu("Enterprise");
 
-                  //LOAD_XML_MODEL_PHYSICAL_LOGICAL
+                    //LOAD_XML_MODEL_PHYSICAL_LOGICAL
                      
                     LoadEorganismXMLModelMenuItem   = new JMenuItem("NEW ::  " + ApplicationConfiguration.LOAD_XML_MODEL_PHYSICAL_LOGICAL);
                     LoadEorganismXMLModelMenuItem.setFont(ApplicationConfiguration.attributeFont);
@@ -119,8 +119,8 @@ public class JModelFrame extends JFrame {
                     LoadDbEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.LOAD_DB_MODEL_PHYSICAL_LOGICAL);
                     LoadDbEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                 //OPEN_ENTERPRISE_EORGANISM_ALL_ENVIRONMENTS
-                 //OPEN_ENTERPRISE_EORGANISM_FROM_ENVIRONMENT
+                  //OPEN_ENTERPRISE_EORGANISM_ALL_ENVIRONMENTS
+                  //OPEN_ENTERPRISE_EORGANISM_FROM_ENVIRONMENT
                   OpenEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_ENTERPRISE_EORGANISM_ALL_ENVIRONMENTS);
                   OpenEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
@@ -130,11 +130,11 @@ public class JModelFrame extends JFrame {
                   OpenEorganismXMLMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_ENTERPRISE_EORGANISM_FROM_XML);
                   OpenEorganismXMLMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                OpenApplicationXMLMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_APPLICATION_FROM_XML);
-                OpenApplicationXMLMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  OpenApplicationXMLMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_APPLICATION_FROM_XML);
+                  OpenApplicationXMLMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                LoadCommandXMLFileMenuItem   = new JMenuItem(ApplicationConfiguration.LOAD_COMMAND_XML_FILE);
-                LoadCommandXMLFileMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  LoadCommandXMLFileMenuItem   = new JMenuItem(ApplicationConfiguration.LOAD_COMMAND_XML_FILE);
+                  LoadCommandXMLFileMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
                   SaveEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.SAVE_ENTERPRISE_EORGANISM);
                   SaveEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
@@ -152,7 +152,7 @@ public class JModelFrame extends JFrame {
                   exitEnterpriseMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
                   // File Menu
-                  fileMenu               = new JMenu();
+                  fileMenu               = new JMenu("File");
                   fileMenu.setFont(ApplicationConfiguration.attributeFont);
                                     
                   newAppScheletonMenuItem   = new JMenuItem(ApplicationConfiguration.NEWAPPSCHELETON_TEXT );
@@ -213,10 +213,10 @@ public class JModelFrame extends JFrame {
                   exitPopupMenuItem        = new JMenuItem( ApplicationConfiguration.EXIT_TEXT );
                   exitPopupMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  openDBMenu            = new JMenu();
+                  openDBMenu            = new JMenu("Open");
                   openDBMenu.setFont(ApplicationConfiguration.attributeFont);
 
-                  webMenu                 = new JMenu();
+                  webMenu                 = new JMenu("Web");
                   webMenu.setFont(ApplicationConfiguration.attributeFont);
 
                   jomoSiteMenuItem              = new JMenuItem( "Launch EOrganism Web version" );
@@ -231,10 +231,10 @@ public class JModelFrame extends JFrame {
                   rmiMenuItem                   = new JMenuItem( "EOrganism RMI" );
                   rmiMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  helpMenu                      = new JMenu();
+                  helpMenu                      = new JMenu("Help");
                   helpMenu.setFont(ApplicationConfiguration.attributeFont);
 
-                  designPattern                  = new JMenu(  );
+                  designPattern                  = new JMenu("Design");
                   designPattern.setFont(ApplicationConfiguration.attributeFont);
 
                   createTemplate   = new JMenuItem( "Create Template" );
@@ -255,7 +255,7 @@ public class JModelFrame extends JFrame {
                   buyMenu   = new JMenuItem("Buy now");
                   buyMenu.setFont(ApplicationConfiguration.attributeFont);
                      
-                  lookAndFeelMenu   = new JMenu();
+                  lookAndFeelMenu   = new JMenu("L&F");
                   lookAndFeelMenu.setFont(ApplicationConfiguration.attributeFont);
 
                   designPatternSubMenu  = new JMenu( "DesignPatternSubMenu" );
@@ -270,7 +270,7 @@ public class JModelFrame extends JFrame {
                   examplesMenuItem  = new JMenu( "Open JConnector Samples Apps" );
                   examplesMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  openHistorySubMenu  = new JMenu();
+                  openHistorySubMenu  = new JMenu("History");
                   openHistorySubMenu.setFont(ApplicationConfiguration.attributeFont);
 
                   menuBar       = new JMenuBar();
@@ -308,16 +308,16 @@ public class JModelFrame extends JFrame {
                   fileMenu.add(saveAsMenuItem);
                   fileMenu.add(saveACopyAsMenuItem);
                   fileMenu.add(saveAllMenuItem);
-                  fileMenu.add( new JPopupMenu.Separator() );
+                  fileMenu.add( new JPopupMenu.Separator());
                   fileMenu.add(printMenuItem);
-                  fileMenu.add(new JPopupMenu.Separator() );
+                  fileMenu.add(new JPopupMenu.Separator());
                   fileMenu.add(exitMenuItem);
 
-                // add actions to web menu
-                  webMenu.add( jomoSiteMenuItem );
-                  webMenu.add( browserOperationMenuItem );
-                  webMenu.add( webServicesMenuItem );
-                  webMenu.add( rmiMenuItem );                
+                  // add actions to web menu
+                  webMenu.add( jomoSiteMenuItem);
+                  webMenu.add( browserOperationMenuItem);
+                  webMenu.add( webServicesMenuItem);
+                  webMenu.add( rmiMenuItem);
 
                   helpMenu.add(aboutMenu);
                   helpMenu.add(howToMenu);
@@ -364,15 +364,15 @@ public class JModelFrame extends JFrame {
                    // setup container with desktop pane- get the content pane to set up GUI
                    container = getContentPane();
                    container.add( desktopPane, BorderLayout.CENTER);
-                   container.add( menuBar, BorderLayout.NORTH);
-                   container.add( toolBar, BorderLayout.NORTH);
+                   //container.add( menuBar, BorderLayout.NORTH);
+                   container.add( toolBar, BorderLayout.SOUTH);
 
                    setDefaultCloseOperation( EXIT_ON_CLOSE );
 
                    setBackground(new Color(0,51,204));
                    setSize( 940, 730 );
                    setVisible(true);
- 
+
     }// end initialize()
 
 } // end JModelFrame class
