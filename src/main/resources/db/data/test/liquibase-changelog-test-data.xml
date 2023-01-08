@@ -1,0 +1,26 @@
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet id="application-test-data" author="Alex ILIE" runOnChange="true" context="test-data">
+		<comment>Create application table test data</comment>
+		<loadUpdateData file="csv/application.csv"
+						primaryKey="id"
+						tableName="application"
+						relativeToChangelogFile="true"
+						separator=";">
+		</loadUpdateData>
+	</changeSet>
+	<changeSet id="component-test-data" author="Alex ILIE" runOnChange="true" context="test-data">
+		<comment>Create component table test data</comment>
+		<loadUpdateData file="csv/component.csv"
+						primaryKey="id"
+						tableName="component"
+						relativeToChangelogFile="true"
+						separator=";">
+			<column name="application_id" type="COMPUTED"/>
+		</loadUpdateData>
+	</changeSet>
+</databaseChangeLog>

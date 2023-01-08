@@ -1,0 +1,4 @@
+component_id;name;type;description
+1;CRM API; REST API; CRM REST APIcomponent
+1;ICM API;REST API; ICM REST APIcomponent
+2;Finance API;REST API; Finance REST APIcomponent

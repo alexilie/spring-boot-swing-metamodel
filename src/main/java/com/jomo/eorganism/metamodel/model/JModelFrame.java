@@ -87,8 +87,9 @@ public class JModelFrame extends JFrame {
                            closeAllMenuItem,
                            newMetalLookAndFeelMenuItem;
 
-   private JMenuBar        menuBar = new JMenuBar();
-   private JToolBar        toolBar = new JToolBar();
+   private JMenuBar        menuBar  = new JMenuBar();
+   private JToolBar        toolBar  = new JToolBar();
+   private JPanel          panel    = new JPanel();
    private Container       container;
    private JDesktopPane    desktopPane;
 
@@ -365,7 +366,10 @@ public class JModelFrame extends JFrame {
                    container = getContentPane();
                    container.add( desktopPane, BorderLayout.CENTER);
                    //container.add( menuBar, BorderLayout.NORTH);
-                   container.add( toolBar, BorderLayout.SOUTH);
+
+                   panel.add(toolBar);
+                   panel.setVisible(true);
+                   container.add( panel, BorderLayout.EAST);
 
                    setDefaultCloseOperation( EXIT_ON_CLOSE );
 

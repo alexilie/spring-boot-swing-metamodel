@@ -1,0 +1,18 @@
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet id="application_basic_information_view" author="Alex ILIE">
+		<comment>Create application information view</comment>
+
+		<createView viewName="v_application_basic_information">
+			SELECT c.name, c.type, c.description, application.name
+			FROM component c
+			LEFT JOIN application a ON c.application_id = application.id
+			ORDER BY c.name
+		</createView>
+	</changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,74 @@
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet id="log_application_data_changed_function" author="Alex ILIE">
+		<comment>Log application data changed function</comment>
+		<createProcedure>
+			CREATE OR REPLACE FUNCTION log_application_data_changed() RETURNS TRIGGER AS
+			$BODY$
+			BEGIN
+				INSERT INTO application_history (application_id, name, type, description, change_date)
+				VALUES (OLD.id_application, OLD.name, OLD.type, OLD.description, now());
+				RETURN NEW;
+			END;
+			$BODY$ LANGUAGE plpgsql;
+		</createProcedure>
+		<rollback>
+			<sql>
+				DROP FUNCTION log_application_data_changed();
+			</sql>
+		</rollback>
+	</changeSet>
+	<changeSet id="log_component_changed_function" author="Alex ILIE">
+		<comment>Log component changed function</comment>
+		<createProcedure>
+			CREATE OR REPLACE FUNCTION log_component_changed() RETURNS TRIGGER AS
+			$BODY$
+				BEGIN
+				INSERT INTO component_history (id_component, name, type, description, change_date)
+				VALUES (OLD.id_component, OLD.name, OLD.type, OLD.description, now());
+				RETURN NEW;
+			END;
+			$BODY$ LANGUAGE plpgsql;
+		</createProcedure>
+		<rollback>
+			<sql>
+				DROP FUNCTION log_component_changed();
+			</sql>
+		</rollback>
+	</changeSet>
+	<changeSet id="changing_application_data_trigger" author="Alex ILIE">
+		<comment>Changing application data trigger</comment>
+
+		<sql>
+			DROP TRIGGER IF EXISTS changing_application_data ON application;
+			CREATE TRIGGER changing_application_data
+			BEFORE UPDATE
+			ON application
+			FOR EACH ROW
+			EXECUTE PROCEDURE log_application_data_changed();
+		</sql>
+		<rollback>
+			DROP TRIGGER changing_application_data ON application;
+		</rollback>
+	</changeSet>
+
+	<changeSet id="changing_component_trigger" author="Alex ILIE">
+		<comment>Changing component trigger</comment>
+
+		<sql>
+			DROP TRIGGER IF EXISTS changing_component ON component;
+			CREATE TRIGGER changing_component
+			BEFORE UPDATE
+			ON component
+			FOR EACH ROW
+			EXECUTE PROCEDURE log_component_changed();
+		</sql>
+		<rollback>
+			DROP TRIGGER changing_component ON component;
+		</rollback>
+	</changeSet>
+</databaseChangeLog>

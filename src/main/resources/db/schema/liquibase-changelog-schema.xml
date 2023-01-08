@@ -1,0 +1,139 @@
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet id="application_table" author="Alex ILIE">
+		<comment>Create application table</comment>
+
+		<createTable tableName="application">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="application_pkey"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createSequence sequenceName="application_seq"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="application_seq"
+						 tableName="application"/>
+	</changeSet>
+	<changeSet id="component_table" author="Alex ILIE">
+		<comment>Create component table</comment>
+		<createTable tableName="component">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="component_pkey"/>
+			</column>
+			<column name="application_id" type="BIGINT">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createSequence sequenceName="component_seq"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="v_seq"
+						 tableName="component"/>
+
+		<createIndex tableName="component" indexName="component_application_idx">
+			<column name="application_id"/>
+		</createIndex>
+		<addForeignKeyConstraint baseTableName="component"
+								 baseColumnNames="application_id"
+								 referencedTableName="application"
+								 referencedColumnNames="id"
+								 constraintName="component_address_fk"
+								 deferrable="false"
+								 initiallyDeferred="false"
+								 onDelete="NO ACTION"
+								 onUpdate="NO ACTION"/>
+	</changeSet>
+
+	<changeSet id="application_history_table" author="Alex ILIE">
+		<comment>Create application history table</comment>
+
+		<createTable tableName="application_history">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="application_history_pkey"/>
+			</column>
+			<column name="application_id" type="BIGINT">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="change_date" type="TIMESTAMP">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+
+		<createSequence sequenceName="application_history_seq"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="application_history_seq"
+						 tableName="v_history"/>
+
+		<createIndex tableName="application_history" indexName="application_history_application_idx">
+			<column name="application_id"/>
+		</createIndex>
+		<createIndex tableName="application_history" indexName="application_history_name_idx">
+			<column name="name"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="component_history_table" author="Alex ILIE">
+		<comment>Create component history table</comment>
+		<createTable tableName="component_history">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="component_history_pkey"/>
+			</column>
+			<column name="application_id" type="BIGINT">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="change_date" type="TIMESTAMP">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createSequence sequenceName="component_history_seq"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="component_history_seq"
+						 tableName="component_history"/>
+
+		<createIndex tableName="component_history" indexName="component_history_component_idx">
+			<column name="component_id"/>
+		</createIndex>
+		<createIndex tableName="component_history" indexName="component_history_application_idx">
+			<column name="application_id"/>
+		</createIndex>
+	</changeSet>
+
+</databaseChangeLog>
