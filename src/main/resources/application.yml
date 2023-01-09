@@ -3,7 +3,7 @@ spring:
     driver-class-name: 'org.postgresql.Driver'
     jdbc-url: 'jdbc:postgresql://localhost:5432/eorganism'
     username: 'eorganism'
-    password: 'alex1900'
+    password: 
   jpa:
     properties:
       hibernate:
