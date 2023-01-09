@@ -82,4 +82,5 @@ public class ApplicationConfiguration {
     public static final String ADD_PROJECTS_EORGANISM =  "ADD_PROJECTS_EORGANISM";
     public static Color color = Color.lightGray;
     public static final Font  attributeFont = new Font("New Font", Font.TRUETYPE_FONT, 11);
+    public static final String APPLICATION_FRAME_NAME =  "EORGANISM MetaModel :: Enterprise Architecture :: Main";
 }

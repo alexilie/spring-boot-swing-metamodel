@@ -13,7 +13,10 @@ import javax.swing.JDesktopPane;
 import javax.swing.JToolBar;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.WindowConstants;
 import com.jomo.eorganism.metamodel.config.ApplicationConfiguration;
+import javafx.scene.layout.BorderStroke;
+import lombok.Getter;
 
 public class JModelFrame extends JFrame {
     private JMenu          fileMenu;
@@ -90,7 +93,7 @@ public class JModelFrame extends JFrame {
 
     // constructor
     public JModelFrame() {
-               super("EORGANISM MetaModel :: Enterprise Architecture :: Main");
+               super();
     } // end constructor JModelFrame
 
     public JFrame getFrame() {
@@ -336,31 +339,32 @@ public class JModelFrame extends JFrame {
                   popupMenu.add( saveAllPopupMenuItem);
                   popupMenu.add( new JPopupMenu.Separator() );
                   popupMenu.add( exitPopupMenuItem);
-             
+
+                  // set toolbar
                   toolBar.setSize(200, 25);
-                  setJMenuBar( menuBar );
+                  toolBar.setVisible(true);
 
                    // for internal frames
                    desktopPane = new JDesktopPane();
                    desktopPane.setSize(940,900);
                    desktopPane.setVisible(true);
-
                    desktopPane.setBackground(new Color(0,51,153));
 
                    // setup container with desktop pane- get the content pane to set up GUI
                    container = getContentPane();
                    container.add( desktopPane, BorderLayout.CENTER);
-                   //container.add( menuBar, BorderLayout.NORTH);
-
                    panel.add(toolBar);
                    panel.setVisible(true);
                    container.add( panel, BorderLayout.EAST);
 
-                   setDefaultCloseOperation( EXIT_ON_CLOSE );
-
+                   // setup JFrame
+                   setJMenuBar( menuBar );
+                   setTitle(ApplicationConfiguration.APPLICATION_FRAME_NAME);
+                   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                    setBackground(new Color(0,51,204));
                    setSize( 940, 730 );
                    setVisible(true);
+
     } // end initialize()
 
 } // end JModelFrame class

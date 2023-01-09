@@ -22,9 +22,7 @@ public class MetamodelApplication {
     } // main
 
     private static ConfigurableApplicationContext createApplicationContext(String[] args) {
-        return new SpringApplicationBuilder(MetamodelApplication.class)
-                .headless(false)
-                .run(args);
+        return new SpringApplicationBuilder(MetamodelApplication.class).headless(false).run(args);
     }
 
     private static void displayMainFrame(ConfigurableApplicationContext context) {
