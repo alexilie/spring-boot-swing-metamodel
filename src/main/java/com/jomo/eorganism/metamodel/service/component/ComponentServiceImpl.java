@@ -1,15 +1,11 @@
 package com.jomo.eorganism.metamodel.service.component;
 
-import com.jomo.eorganism.metamodel.dto.component.ComponentCountDto;
 import com.jomo.eorganism.metamodel.entity.component.ComponentEntity;
 import com.jomo.eorganism.metamodel.repository.component.ComponentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor
@@ -32,6 +28,5 @@ class ComponentServiceImpl implements ComponentService {
     public void remove(ComponentEntity client) {
         componentRepository.delete(client);
     }
-
 
 }

@@ -47,7 +47,7 @@
 		</createTable>
 		<createSequence sequenceName="component_seq"/>
 		<addDefaultValue columnName="id"
-						 defaultValueSequenceNext="v_seq"
+						 defaultValueSequenceNext="component_seq"
 						 tableName="component"/>
 
 		<createIndex tableName="component" indexName="component_application_idx">
@@ -91,7 +91,7 @@
 		<createSequence sequenceName="application_history_seq"/>
 		<addDefaultValue columnName="id"
 						 defaultValueSequenceNext="application_history_seq"
-						 tableName="v_history"/>
+						 tableName="application_history"/>
 
 		<createIndex tableName="application_history" indexName="application_history_application_idx">
 			<column name="application_id"/>
@@ -107,9 +107,10 @@
 			<column name="id" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="component_history_pkey"/>
 			</column>
-			<column name="application_id" type="BIGINT">
+			<column name="component_id" type="BIGINT">
 				<constraints nullable="false"/>
 			</column>
+
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
 			</column>
@@ -131,9 +132,7 @@
 		<createIndex tableName="component_history" indexName="component_history_component_idx">
 			<column name="component_id"/>
 		</createIndex>
-		<createIndex tableName="component_history" indexName="component_history_application_idx">
-			<column name="application_id"/>
-		</createIndex>
+
 	</changeSet>
 
 </databaseChangeLog>

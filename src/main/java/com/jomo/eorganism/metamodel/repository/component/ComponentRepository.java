@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ComponentRepository extends JpaRepository<ComponentEntity, Long> {
 
-    @Query(value = "SELECT c.name AS name, c.type AS type, COUNT(a.id) AS count " +
-            "FROM ApplicationEntity a ")
+    @Query(value = "Select name, type, description FROM ComponentEntity")
     Object[][] getComponentCount();
 
 }

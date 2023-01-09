@@ -1,4 +1,7 @@
-component_id;name;type;description
-1;CRM API; REST API; CRM REST APIcomponent
-1;ICM API;REST API; ICM REST APIcomponent
-2;Finance API;REST API; Finance REST APIcomponent
+application_id;name;type;description
+1;CRM API; REST API; CRM REST API Component
+2;IVR API;REST API; IVR REST API Component
+2;IVR SEC API; REST API; IVR SECURITY REST API Component
+1;ICM API;REST API; ICM REST API Component
+3;Finance API;REST API; Finance REST API Component
+3;Finance ETL;Batch; Finance Batch Component

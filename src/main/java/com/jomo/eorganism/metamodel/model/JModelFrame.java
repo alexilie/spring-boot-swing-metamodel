@@ -1,91 +1,79 @@
 package com.jomo.eorganism.metamodel.model;
-// Java core packages
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
 
-// Java extension packages
-import javax.swing.*;
-
-//
-import com.jomo.eorganism.metamodel.MetamodelApplication;
-import com.jomo.eorganism.metamodel.config.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-
-// l & f
-
-//Log4J 2
-
+import java.awt.Container;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
+import javax.swing.JPopupMenu;
+import javax.swing.JWindow;
+import javax.swing.JDesktopPane;
+import javax.swing.JToolBar;
+import javax.swing.JPanel;
+import javax.swing.JTree;
+import com.jomo.eorganism.metamodel.config.ApplicationConfiguration;
 
 public class JModelFrame extends JFrame {
+    private JMenu          fileMenu;
+    private JMenu          enterpriseMenu;
+    private JMenu          openDBMenu;
+    private JMenu          webMenu;
+    private JMenu          helpMenu;
+    private JMenu          designPattern;
+    private JMenu          lookAndFeelMenu;
+    private JMenu          designPatternSubMenu;
+    private JMenu          openHistorySubMenu;
 
-    private JMenu          fileMenu,
-                           enterpriseMenu,
-                           openDBMenu,
-                           //openAppMenu,
-                           webMenu,   
-                           helpMenu,
-                           designPattern,
-                           lookAndFeelMenu,
-                           designPatternSubMenu,
-                           themeMenu,
-                           projectPreferencesMenu,
-                           openHistorySubMenu;
+    private JMenuItem      loadEorganismXMLModelMenuItem;
+    private JMenuItem      loadDbEorganismMenuItem;
+    private JMenuItem      openEorganismMenuItem;
+    private JMenuItem      openEorganismEnvironmentMenuItem;
+    private JMenuItem      openEorganismXMLMenuItem;
+    private JMenuItem      openApplicationXMLMenuItem;
+    private JMenuItem      loadCommandXMLFileMenuItem;
+    private JMenuItem      saveEorganismMenuItem;
+    private JMenuItem      closeEorganismMenuItem;
+    private JMenuItem      cloneEorganismMenuItem;
+    private JMenuItem      compareEorganismMenuItem;
+    private JMenuItem      exitEnterpriseMenuItem;
+    private JMenuItem      newAppScheletonMenuItem;
+    private JMenuItem      newAppLookupMenuItem;
+    private JMenuItem      openAppDBMenuItem;
+    private JMenuItem      openFromXMLMenuItem;
+    private JMenuItem      saveMenuItem;
+    private JMenuItem      saveAllMenuItem;
+    private JMenuItem      saveAsMenuItem;
+    private JMenuItem      saveACopyAsMenuItem;
+    private JMenuItem      exitMenuItem;
+    private JMenuItem      aboutMenu;
+    private JMenuItem      newAppScheletonPopupMenuItem;
+    private JMenuItem      newAppLookupPopupMenuItem;
+    private JMenuItem      openFromXMLPopupMenuItem;
+    private JMenuItem      savePopupMenuItem;
+    private JMenuItem      saveAllPopupMenuItem;
+    private JMenuItem      exitPopupMenuItem;
+    private JMenuItem      aboutPopupMenu;
+    private JMenuItem      howToMenu;
+    private JMenuItem      buyMenu;
+    private JMenuItem      jomoSiteMenuItem;
+    private JMenuItem      browserOperationMenuItem;
+    private JMenuItem      webServicesMenuItem;
+    private JMenuItem      rmiMenuItem;
+    private JMenuItem      createTemplate;
+    private JMenuItem      openTemplate;
+    private JMenuItem      jFileChooserMenuItem;
+    private JMenuItem      designPatternSubMenuFactoryPattern;
 
-   private JMenuItem        LoadEorganismXMLModelMenuItem,
-                            LoadDbEorganismMenuItem,
-                            OpenEorganismMenuItem,
-                            OpenEorganismEnvironmentMenuItem,
-                            OpenEorganismXMLMenuItem,
-                            OpenApplicationXMLMenuItem,
-                            LoadCommandXMLFileMenuItem,
-                            SaveEorganismMenuItem,
-                            CloseEorganismMenuItem,
-                            CloneEorganismMenuItem,
-                            CompareEorganismMenuItem,
-                            exitEnterpriseMenuItem,
-                            newAppScheletonMenuItem,
-                            newAppLookupMenuItem,
-                            openAppDBMenuItem,
-                            openFromXMLMenuItem,
-                           saveMenuItem,
-                           saveAllMenuItem,
-                           saveAsMenuItem,
-                           saveACopyAsMenuItem,
-                           exitMenuItem,
-                           aboutMenu,
-                           newAppScheletonPopupMenuItem,
-                           newAppLookupPopupMenuItem,
-                           openFromXMLPopupMenuItem,
-                           savePopupMenuItem,
-                           saveAllPopupMenuItem,
-                           exitPopupMenuItem,
-                           aboutPopupMenu,
-                           howToMenu,
-                           buyMenu,
-                           jomoSiteMenuItem,
-                           browserOperationMenuItem,
-                           webServicesMenuItem,
-                           rmiMenuItem,
-                           createTemplate,
-                           openTemplate,
-                           jFileChooserMenuItem,
-                           designPatternSubMenuFactoryPattern,
-                           designPatternSubMenuServiceToWorkerPattern,
-                           designPatternSubMenuFacadePattern,
-                           generatePreferencesMenuItem,
-                           deploymentPreferencesMenuItem,
-                           createMyLookAndFeelMenuItem,
-                           openHistoryMenuItem,
-                           saveHistoryMenuItem,
-                           examplesMenuItem,
-                           printMenuItem,
-                           pageSetupMenuItem,
-                           closeMenuItem,
-                           closeAllMenuItem,
-                           newMetalLookAndFeelMenuItem;
+    private JMenuItem      openHistoryMenuItem;
+    private JMenuItem      saveHistoryMenuItem;
+    private JMenuItem      examplesMenuItem;
+    private JMenuItem      printMenuItem;
+    private JMenuItem      pageSetupMenuItem;
+    private JMenuItem      closeMenuItem;
+    private JMenuItem      closeAllMenuItem;
+    private JMenuItem      newMetalLookAndFeelMenuItem;
 
    private JMenuBar        menuBar  = new JMenuBar();
    private JToolBar        toolBar  = new JToolBar();
@@ -94,8 +82,7 @@ public class JModelFrame extends JFrame {
    private JDesktopPane    desktopPane;
 
    // JTree for displaying file system
-   private JTree           fileTree;
-
+   private JTree                    fileTree;
    private JPopupMenu               popupMenu       = new JPopupMenu();
    private JFrame                   frame           = null;
    private JWindow                  splashScreen    = null;
@@ -104,50 +91,52 @@ public class JModelFrame extends JFrame {
     // constructor
     public JModelFrame() {
                super("EORGANISM MetaModel :: Enterprise Architecture :: Main");
-    }// end constructor JModelFrame
+    } // end constructor JModelFrame
 
-    public JFrame getFrame() {return frame;}
+    public JFrame getFrame() {
+        return frame;
+    }
 
-    public void initialize(){
+    public void initialize() {
                     // new menus and actions
-                    enterpriseMenu 		 = new JMenu("Enterprise");
+                    enterpriseMenu = new JMenu("Enterprise");
 
                     //LOAD_XML_MODEL_PHYSICAL_LOGICAL
                      
-                    LoadEorganismXMLModelMenuItem   = new JMenuItem("NEW ::  " + ApplicationConfiguration.LOAD_XML_MODEL_PHYSICAL_LOGICAL);
-                    LoadEorganismXMLModelMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                    loadEorganismXMLModelMenuItem   = new JMenuItem("NEW ::  " + ApplicationConfiguration.LOAD_XML_MODEL_PHYSICAL_LOGICAL);
+                    loadEorganismXMLModelMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                    LoadDbEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.LOAD_DB_MODEL_PHYSICAL_LOGICAL);
-                    LoadDbEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                    loadDbEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.LOAD_DB_MODEL_PHYSICAL_LOGICAL);
+                    loadDbEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
                   //OPEN_ENTERPRISE_EORGANISM_ALL_ENVIRONMENTS
                   //OPEN_ENTERPRISE_EORGANISM_FROM_ENVIRONMENT
-                  OpenEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_ENTERPRISE_EORGANISM_ALL_ENVIRONMENTS);
-                  OpenEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  openEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_ENTERPRISE_EORGANISM_ALL_ENVIRONMENTS);
+                  openEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  OpenEorganismEnvironmentMenuItem   = new JMenu("LOAD EORGANISM ENVIRONMENTS");
-                  OpenEorganismEnvironmentMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  openEorganismEnvironmentMenuItem   = new JMenu("LOAD EORGANISM ENVIRONMENTS");
+                  openEorganismEnvironmentMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  OpenEorganismXMLMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_ENTERPRISE_EORGANISM_FROM_XML);
-                  OpenEorganismXMLMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  openEorganismXMLMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_ENTERPRISE_EORGANISM_FROM_XML);
+                  openEorganismXMLMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  OpenApplicationXMLMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_APPLICATION_FROM_XML);
-                  OpenApplicationXMLMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  openApplicationXMLMenuItem   = new JMenuItem(ApplicationConfiguration.OPEN_APPLICATION_FROM_XML);
+                  openApplicationXMLMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  LoadCommandXMLFileMenuItem   = new JMenuItem(ApplicationConfiguration.LOAD_COMMAND_XML_FILE);
-                  LoadCommandXMLFileMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  loadCommandXMLFileMenuItem   = new JMenuItem(ApplicationConfiguration.LOAD_COMMAND_XML_FILE);
+                  loadCommandXMLFileMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  SaveEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.SAVE_ENTERPRISE_EORGANISM);
-                  SaveEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  saveEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.SAVE_ENTERPRISE_EORGANISM);
+                  saveEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  CloseEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.CLOSE_ENTERPRISE_EORGANISM);
-                  CloseEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  closeEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.CLOSE_ENTERPRISE_EORGANISM);
+                  closeEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  CloneEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.CLONE_ENTERPRISE_EORGANISM);
-                  CloneEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  cloneEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.CLONE_ENTERPRISE_EORGANISM);
+                  cloneEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                  CompareEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.COMPARE_ENTERPRISE_EORGANISM);
-                  CompareEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
+                  compareEorganismMenuItem   = new JMenuItem(ApplicationConfiguration.COMPARE_ENTERPRISE_EORGANISM);
+                  compareEorganismMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
                   exitEnterpriseMenuItem              = new JMenuItem(ApplicationConfiguration.EXIT_TEXT );
                   exitEnterpriseMenuItem.setFont(ApplicationConfiguration.attributeFont);
@@ -159,7 +148,6 @@ public class JModelFrame extends JFrame {
                   newAppScheletonMenuItem   = new JMenuItem(ApplicationConfiguration.NEWAPPSCHELETON_TEXT );
                   newAppScheletonMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
-                 
                   newAppLookupMenuItem      = new JMenuItem(ApplicationConfiguration.NEWAPPLOOKUP_TEXT );
                   newAppLookupMenuItem.setFont(ApplicationConfiguration.attributeFont);
 
@@ -278,23 +266,21 @@ public class JModelFrame extends JFrame {
                   menuBar.setFont(ApplicationConfiguration.attributeFont);
 
                   // enterprise
-                  enterpriseMenu.add(LoadEorganismXMLModelMenuItem);   
-                  enterpriseMenu.add(LoadDbEorganismMenuItem);
-                  enterpriseMenu.add(OpenEorganismMenuItem);
-                  enterpriseMenu.add(OpenEorganismEnvironmentMenuItem);
-                  enterpriseMenu.add(OpenEorganismXMLMenuItem);
-                  enterpriseMenu.add(OpenApplicationXMLMenuItem);
-                  enterpriseMenu.add(LoadCommandXMLFileMenuItem);
-                  enterpriseMenu.add(SaveEorganismMenuItem);
+                  enterpriseMenu.add(loadEorganismXMLModelMenuItem);
+                  enterpriseMenu.add(loadDbEorganismMenuItem);
+                  enterpriseMenu.add(openEorganismMenuItem);
+                  enterpriseMenu.add(openEorganismEnvironmentMenuItem);
+                  enterpriseMenu.add(openEorganismXMLMenuItem);
+                  enterpriseMenu.add(openApplicationXMLMenuItem);
+                  enterpriseMenu.add(loadCommandXMLFileMenuItem);
+                  enterpriseMenu.add(saveEorganismMenuItem);
                   enterpriseMenu.add(new JPopupMenu.Separator() );
-                  enterpriseMenu.add(CloseEorganismMenuItem);
-                  enterpriseMenu.add(CloneEorganismMenuItem);
-                  enterpriseMenu.add(CompareEorganismMenuItem);
+                  enterpriseMenu.add(closeEorganismMenuItem);
+                  enterpriseMenu.add(cloneEorganismMenuItem);
+                  enterpriseMenu.add(compareEorganismMenuItem);
                   enterpriseMenu.add(new JPopupMenu.Separator() );
                   enterpriseMenu.add(exitEnterpriseMenuItem);
-                  
-                  //end
-                 // add actions to File menu
+
                   fileMenu.add(newAppScheletonMenuItem);
                   fileMenu.add(newAppLookupMenuItem);
                   fileMenu.add(openAppDBMenuItem);
@@ -314,7 +300,6 @@ public class JModelFrame extends JFrame {
                   fileMenu.add(new JPopupMenu.Separator());
                   fileMenu.add(exitMenuItem);
 
-                  // add actions to web menu
                   webMenu.add( jomoSiteMenuItem);
                   webMenu.add( browserOperationMenuItem);
                   webMenu.add( webServicesMenuItem);
@@ -340,7 +325,7 @@ public class JModelFrame extends JFrame {
 
                   toolBar.putClientProperty("JToolBar.isRollover", Boolean.TRUE);
                  
-                   // creates the JPopUpMenu
+                  // creates the JPopUpMenu
                   popupMenu.add( newAppScheletonPopupMenuItem);
                   popupMenu.add( newAppLookupPopupMenuItem);
                   popupMenu.add( openAppDBMenuItem);
@@ -376,7 +361,6 @@ public class JModelFrame extends JFrame {
                    setBackground(new Color(0,51,204));
                    setSize( 940, 730 );
                    setVisible(true);
-
-    }// end initialize()
+    } // end initialize()
 
 } // end JModelFrame class

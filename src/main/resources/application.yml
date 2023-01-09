@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: 'org.postgresql.Driver'
     jdbc-url: 'jdbc:postgresql://localhost:5432/eorganism'
-    username: 'eorganism_user'
+    username: 'eorganism'
     password: 'alex1900'
   jpa:
     properties:
