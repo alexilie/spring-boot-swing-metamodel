@@ -34,13 +34,13 @@ public class PersistenceConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan(ENTITY_BASE_PACKAGE);
-        em.setPersistenceUnitName(EORGANISM_PERSISTENCE_UNIT_NAME);
-        em.setJpaVendorAdapter(postgreSQLVendorAdapter());
-        em.setJpaProperties(additionalProperties());
-        return em;
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(dataSource());
+        entityManagerFactoryBean.setPackagesToScan(ENTITY_BASE_PACKAGE);
+        entityManagerFactoryBean.setPersistenceUnitName(EORGANISM_PERSISTENCE_UNIT_NAME);
+        entityManagerFactoryBean.setJpaVendorAdapter(postgreSQLVendorAdapter());
+        entityManagerFactoryBean.setJpaProperties(additionalProperties());
+        return entityManagerFactoryBean;
     }
 
     @Bean
