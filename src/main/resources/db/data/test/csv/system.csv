@@ -1,0 +1,18 @@
+name;type;description;domain_id
+CRM Web;Critical;Customer Resource Management Web;7
+CRM Admin GUI;Critical;Customer Resource Management Web;7
+SalesForce CRM;Critical;Customer Resource Management Web;7
+SalesForce API Web;Critical;Customer Resource Management Web;7
+SalesForce Backend;Critical;Customer Resource Management Web;7
+CRM;Critical;Customer Resource Management;7
+CRM Backend;Critical;Customer Resource Management;7
+IVR;Critical;Integrated Voice Recognition;7
+IVR Admin;Critical;Integrated Voice Recognition;7
+IVR API;Critical;Integrated Voice Recognition;7
+Finance;Critical;Financial Systems;2
+Finance API;Critical;Financial Systems;2
+HR API;Critical;Financial Systems;9
+LMS API;Critical;Financial Systems;2
+CMS API;Critical;Financial Systems;2
+Business Banking Billing;Critical;Business Banking Billing Systems;8
+Wealth Management;Critical;Wealth Management and trading Systems;3

@@ -4,7 +4,7 @@
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-	<changeSet id="component_basic_information_view" author="Alex ILIE">
+	<changeSet id="component_basic_information_view" author="EOrganism">
 		<comment>Create component information view</comment>
 
 		<createView viewName="v_component_basic_information">

@@ -3,13 +3,13 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-
-	<changeSet id="application_table" author="Alex ILIE">
-		<comment>Create application table</comment>
-
-		<createTable tableName="application">
+	<changeSet id="domain_table" author="EOrganism">
+		<comment>Create domain table</comment>
+		<createTable tableName="domain">
 			<column name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" primaryKeyName="application_pkey"/>
+				<constraints nullable="false" primaryKey="true" primaryKeyName="domain_pkey"/>
+			</column>
+			<column name="correlation_id" type="VARCHAR(100)">
 			</column>
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
@@ -20,17 +20,170 @@
 			<column name="description" type="VARCHAR(250)">
 				<constraints nullable="false"/>
 			</column>
+			<column name="status" type="VARCHAR(30)">
+			</column>
+			<column name="inventory_name" type="VARCHAR(250)">
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+			</column>
+			<column name="long_name" type="VARCHAR(250)">
+			</column>
+			<column name="code" type="VARCHAR(30)">
+			</column>
+			<column name="classification" type="VARCHAR(50)">
+			</column>
+			<column name="last_updated_user_id" type="BIGINT">
+			</column>
+			<column name="last_updated_user_name" type="VARCHAR(100)">
+			</column>
+			<column name="last_updated_application_id" type="BIGINT">
+			</column>
+			<column name="last_updated_application_name" type="VARCHAR(100)">
+			</column>
+			<column name="created_date" type="TIMESTAMP">
+			</column>
+			<column name="last_updated_date" type="TIMESTAMP">
+			</column>
+		</createTable>
+		<createSequence sequenceName="domain_seq"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="domain_seq"
+						 tableName="domain"/>
+	</changeSet>
+	<changeSet id="system_table" author="EOrganism">
+		<comment>Create system table</comment>
+		<createTable tableName="system">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="system_pkey"/>
+			</column>
+			<column name="correlation_id" type="VARCHAR(100)">
+			</column>
+			<column name="domain_id" type="BIGINT">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="status" type="VARCHAR(30)">
+			</column>
+			<column name="inventory_name" type="VARCHAR(250)">
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+			</column>
+			<column name="long_name" type="VARCHAR(250)">
+			</column>
+			<column name="code" type="VARCHAR(30)">
+			</column>
+			<column name="classification" type="VARCHAR(50)">
+			</column>
+			<column name="last_updated_user_id" type="BIGINT">
+			</column>
+			<column name="last_updated_user_name" type="VARCHAR(100)">
+			</column>
+			<column name="last_updated_application_id" type="BIGINT">
+			</column>
+			<column name="last_updated_application_name" type="VARCHAR(100)">
+			</column>
+			<column name="created_date" type="TIMESTAMP">
+			</column>
+			<column name="last_updated_date" type="TIMESTAMP">
+			</column>
+		</createTable>
+		<createSequence sequenceName="system_seq"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="system_seq"
+						 tableName="system"/>
+		<createIndex tableName="system" indexName="system_domain_idx">
+			<column name="domain_id"/>
+		</createIndex>
+		<addForeignKeyConstraint baseTableName="system"
+								 baseColumnNames="domain_id"
+								 referencedTableName="domain"
+								 referencedColumnNames="id"
+								 constraintName="system_domain_fk"
+								 deferrable="false"
+								 initiallyDeferred="false"
+								 onDelete="NO ACTION"
+								 onUpdate="NO ACTION"/>
+	</changeSet>
+	<changeSet id="application_table" author="EOrganism">
+		<comment>Create application table</comment>
+		<createTable tableName="application">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="application_pkey"/>
+			</column>
+			<column name="correlation_id" type="VARCHAR(100)">
+			</column>
+			<column name="system_id" type="BIGINT">
+				<constraints nullable="false"/>
+			</column>
+			<column name="domain_id" type="BIGINT">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="status" type="VARCHAR(30)">
+			</column>
+			<column name="inventory_name" type="VARCHAR(250)">
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+			</column>
+			<column name="long_name" type="VARCHAR(250)">
+			</column>
+			<column name="code" type="VARCHAR(30)">
+			</column>
+			<column name="classification" type="VARCHAR(50)">
+			</column>
+			<column name="last_updated_user_id" type="BIGINT">
+			</column>
+			<column name="last_updated_user_name" type="VARCHAR(100)">
+			</column>
+			<column name="last_updated_application_id" type="BIGINT">
+			</column>
+			<column name="last_updated_application_name" type="VARCHAR(100)">
+			</column>
+			<column name="created_date" type="TIMESTAMP">
+			</column>
+			<column name="last_updated_date" type="TIMESTAMP">
+			</column>
 		</createTable>
 		<createSequence sequenceName="application_seq"/>
 		<addDefaultValue columnName="id"
 						 defaultValueSequenceNext="application_seq"
 						 tableName="application"/>
+		<createIndex tableName="application" indexName="application_system_idx">
+			<column name="system_id"/>
+		</createIndex>
+		<addForeignKeyConstraint baseTableName="application"
+								 baseColumnNames="system_id"
+								 referencedTableName="system"
+								 referencedColumnNames="id"
+								 constraintName="application_system_fk"
+								 deferrable="false"
+								 initiallyDeferred="false"
+								 onDelete="NO ACTION"
+								 onUpdate="NO ACTION"/>
 	</changeSet>
-	<changeSet id="component_table" author="Alex ILIE">
+	<changeSet id="component_table" author="EOrganism">
 		<comment>Create component table</comment>
 		<createTable tableName="component">
 			<column name="id" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="component_pkey"/>
+			</column>
+			<column name="correlation_id" type="VARCHAR(100)">
 			</column>
 			<column name="application_id" type="BIGINT">
 				<constraints nullable="false"/>
@@ -44,12 +197,35 @@
 			<column name="description" type="VARCHAR(250)">
 				<constraints nullable="false"/>
 			</column>
+			<column name="status" type="VARCHAR(30)">
+			</column>
+			<column name="inventory_name" type="VARCHAR(250)">
+			</column>
+			<column name="short_name" type="VARCHAR(50)">
+			</column>
+			<column name="long_name" type="VARCHAR(250)">
+			</column>
+			<column name="code" type="VARCHAR(30)">
+			</column>
+			<column name="classification" type="VARCHAR(50)">
+			</column>
+			<column name="last_updated_user_id" type="BIGINT">
+			</column>
+			<column name="last_updated_user_name" type="VARCHAR(100)">
+			</column>
+			<column name="last_updated_application_id" type="BIGINT">
+			</column>
+			<column name="last_updated_application_name" type="VARCHAR(100)">
+			</column>
+			<column name="created_date" type="TIMESTAMP">
+			</column>
+			<column name="last_updated_date" type="TIMESTAMP">
+			</column>
 		</createTable>
 		<createSequence sequenceName="component_seq"/>
 		<addDefaultValue columnName="id"
 						 defaultValueSequenceNext="component_seq"
 						 tableName="component"/>
-
 		<createIndex tableName="component" indexName="component_application_idx">
 			<column name="application_id"/>
 		</createIndex>
@@ -57,19 +233,20 @@
 								 baseColumnNames="application_id"
 								 referencedTableName="application"
 								 referencedColumnNames="id"
-								 constraintName="component_address_fk"
+								 constraintName="component_application_fk"
 								 deferrable="false"
 								 initiallyDeferred="false"
 								 onDelete="NO ACTION"
 								 onUpdate="NO ACTION"/>
 	</changeSet>
-
-	<changeSet id="application_history_table" author="Alex ILIE">
+	<changeSet id="application_history_table" author="EOrganism">
 		<comment>Create application history table</comment>
 
 		<createTable tableName="application_history">
 			<column name="id" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="application_history_pkey"/>
+			</column>
+			<column name="correlation_id" type="VARCHAR(100)">
 			</column>
 			<column name="application_id" type="BIGINT">
 				<constraints nullable="false"/>
@@ -100,8 +277,7 @@
 			<column name="name"/>
 		</createIndex>
 	</changeSet>
-
-	<changeSet id="component_history_table" author="Alex ILIE">
+	<changeSet id="component_history_table" author="EOrganism">
 		<comment>Create component history table</comment>
 		<createTable tableName="component_history">
 			<column name="id" type="BIGINT">
@@ -110,7 +286,6 @@
 			<column name="component_id" type="BIGINT">
 				<constraints nullable="false"/>
 			</column>
-
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
 			</column>

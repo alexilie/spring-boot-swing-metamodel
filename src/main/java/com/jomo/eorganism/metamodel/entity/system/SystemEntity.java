@@ -1,12 +1,10 @@
-package com.jomo.eorganism.metamodel.entity.application;
+package com.jomo.eorganism.metamodel.entity.system;
 
-import com.jomo.eorganism.metamodel.entity.base.BaseEntity;
-import com.jomo.eorganism.metamodel.entity.system.SystemEntity;
 import com.jomo.eorganism.metamodel.entity.domain.DomainEntity;
+import com.jomo.eorganism.metamodel.entity.base.BaseEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -15,26 +13,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "application")
+@Table(name = "system")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 //@Setter
-public class ApplicationEntity extends BaseEntity {
+public class SystemEntity extends BaseEntity {
 
     private String correlationId;
 
     @ManyToOne
-    @JoinColumn(name = "system_id")
-    private SystemEntity system;
-
-    @ManyToOne
     @JoinColumn(name = "domain_id")
-    private DomainEntity domain;
+    private DomainEntity application;
 
     @Override
     public String toString() {
-        return "ApplicationEntity" +
+        return "SystemEntity" +
                 ", correlationId='" + correlationId + '\'' +
                  super.toString();
     }

@@ -14,6 +14,10 @@ import javax.swing.JToolBar;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.WindowConstants;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import com.jomo.eorganism.metamodel.config.ApplicationConfiguration;
 import javafx.scene.layout.BorderStroke;
 import lombok.Getter;
@@ -91,6 +95,10 @@ public class JModelFrame extends JFrame {
    private JWindow                  splashScreen    = null;
    private JWindow                  loadingScreen   = null;
 
+    public JButton[]    buttonsArray                = null;
+    public String[]     toolTixTextArray            = null;
+    public ImageIcon[]  iconImageArray              = null;
+
     // constructor
     public JModelFrame() {
                super();
@@ -101,6 +109,40 @@ public class JModelFrame extends JFrame {
     }
 
     public void initialize() {
+
+                    buttonsArray             = new JButton[ApplicationConfiguration.BUTTONS_NUMBER];
+                    toolTixTextArray         = new String[ApplicationConfiguration.BUTTONS_NUMBER];
+                    iconImageArray           = new ImageIcon[ApplicationConfiguration.BUTTONS_NUMBER];
+
+                    for ( int i = 0; i < ApplicationConfiguration.BUTTONS_NUMBER; i++) {
+                        buttonsArray[i]                = new JButton();
+                        toolTixTextArray[i]            = "";
+                        iconImageArray[i]              = new ImageIcon();
+                    } // for all the buttons
+
+                    iconImageArray[ApplicationConfiguration.NEWAPPSCHELETON]       = new ImageIcon("new.gif");
+                    iconImageArray[ApplicationConfiguration.NEWAPPLOOKUP]          = new ImageIcon("new16.gif");
+                    iconImageArray[ApplicationConfiguration.OPENFROMXML]           = new ImageIcon("open16.gif");
+                    iconImageArray[ApplicationConfiguration.SAVE]                  = new ImageIcon("save16.gif");
+                    iconImageArray[ApplicationConfiguration.SAVEALL]               = new ImageIcon("SaveAll16.gif");
+                    iconImageArray[ApplicationConfiguration.EXIT]                  = new ImageIcon("16x16NewDependentObject.gif");
+                    iconImageArray[ApplicationConfiguration.ABOUT]                 = new ImageIcon("about.gif");
+                    iconImageArray[ApplicationConfiguration.OPEN_ENTERPRISE]       = new ImageIcon("new.gif");
+
+                    toolTixTextArray[ApplicationConfiguration.NEWAPPSCHELETON]            = ApplicationConfiguration.NEWAPPSCHELETON_TEXT;
+                    toolTixTextArray[ApplicationConfiguration.NEWAPPLOOKUP]               = ApplicationConfiguration.NEWAPPLOOKUP_TEXT;
+                    toolTixTextArray[ApplicationConfiguration.OPENFROMXML]                = ApplicationConfiguration.OPENFROMXML_TEXT;
+                    toolTixTextArray[ApplicationConfiguration.SAVE]                       = ApplicationConfiguration.SAVE_TEXT;
+                    toolTixTextArray[ApplicationConfiguration.SAVEALL]                    = ApplicationConfiguration.SAVEALL_TEXT ;
+                    toolTixTextArray[ApplicationConfiguration.EXIT]                       = ApplicationConfiguration.EXIT_TEXT;
+                    toolTixTextArray[ApplicationConfiguration.ABOUT]                      = ApplicationConfiguration.ABOUT_TEXT;
+                    toolTixTextArray[ApplicationConfiguration.OPEN_ENTERPRISE]            = ApplicationConfiguration.OPEN_ENTERPRISE_TEXT;
+
+                    for ( int i = 0; i < ApplicationConfiguration.BUTTONS_NUMBER; i++) {
+                        buttonsArray[i].setToolTipText(toolTixTextArray[i]);
+                        buttonsArray[i].setIcon(iconImageArray[i]);
+
+                    } // for all buttons
                     // new menus and actions
                     enterpriseMenu = new JMenu("Enterprise");
 
@@ -341,8 +383,41 @@ public class JModelFrame extends JFrame {
                   popupMenu.add( exitPopupMenuItem);
 
                   // set toolbar
+                  for ( int i = 0; i < ApplicationConfiguration.BUTTONS_NUMBER; i++ ) {
+
+                    toolBar.add(buttonsArray[i]);
+
+                  } // for all buttons
+
+                  toolBar.putClientProperty("JToolBar.isRollover", Boolean.TRUE);
                   toolBar.setSize(200, 25);
-                  toolBar.setVisible(true);
+                  toolBar.addMouseListener( new MouseAdapter() {
+
+                                                  public void mousePressed(MouseEvent me) {
+
+                                                      verifyTriggerEvent(me);
+
+                                                  }
+
+                                                  public void mouseClicked(MouseEvent me) {
+
+                                                      verifyTriggerEvent(me);
+
+                                                  }
+
+                                                  private void verifyTriggerEvent(MouseEvent mouseEvent) {
+
+                                                      if (mouseEvent.getClickCount() == 2) {
+
+                                                          popupMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
+
+                                                      }
+                                                  }
+
+                                              }
+                    ); // tool bar mouse listener
+
+                   toolBar.setVisible(true);
 
                    // for internal frames
                    desktopPane = new JDesktopPane();
@@ -353,7 +428,8 @@ public class JModelFrame extends JFrame {
                    // setup container with desktop pane- get the content pane to set up GUI
                    container = getContentPane();
                    container.add( desktopPane, BorderLayout.CENTER);
-                   panel.add(toolBar);
+                   container.add( toolBar, BorderLayout.NORTH);
+
                    panel.setVisible(true);
                    container.add( panel, BorderLayout.EAST);
 

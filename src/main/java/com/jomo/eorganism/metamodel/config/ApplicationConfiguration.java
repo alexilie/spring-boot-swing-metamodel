@@ -34,6 +34,9 @@ public class ApplicationConfiguration {
     public static final int EXIT             = 5;
     public static final int ABOUT            = 6;
     public static final int OPEN_ENTERPRISE  = 7;
+
+    public static final int BUTTONS_NUMBER           = 8;
+
     public static final String NEWAPPSCHELETON_TEXT  = "New JEE App from Scheleton";
     public static final String NEWAPPLOOKUP_TEXT     = "New JEE App from DB Lookup";
     public static final String OPENFROMDB_TEXT       = "Open JEE Application from DB";
@@ -83,4 +86,7 @@ public class ApplicationConfiguration {
     public static Color color = Color.lightGray;
     public static final Font  attributeFont = new Font("New Font", Font.TRUETYPE_FONT, 11);
     public static final String APPLICATION_FRAME_NAME =  "EORGANISM MetaModel :: Enterprise Architecture :: Main";
+
+
+
 }

@@ -4,7 +4,7 @@
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-	<changeSet id="log_application_data_changed_function" author="Alex ILIE">
+	<changeSet id="log_application_data_changed_function" author="EOrganism">
 		<comment>Log application data changed function</comment>
 		<createProcedure>
 			CREATE OR REPLACE FUNCTION log_application_data_changed() RETURNS TRIGGER AS
@@ -22,7 +22,7 @@
 			</sql>
 		</rollback>
 	</changeSet>
-	<changeSet id="log_component_changed_function" author="Alex ILIE">
+	<changeSet id="log_component_changed_function" author="EOrganism">
 		<comment>Log component changed function</comment>
 		<createProcedure>
 			CREATE OR REPLACE FUNCTION log_component_changed() RETURNS TRIGGER AS
@@ -40,7 +40,7 @@
 			</sql>
 		</rollback>
 	</changeSet>
-	<changeSet id="changing_application_data_trigger" author="Alex ILIE">
+	<changeSet id="changing_application_data_trigger" author="EOrganism">
 		<comment>Changing application data trigger</comment>
 
 		<sql>
@@ -56,7 +56,7 @@
 		</rollback>
 	</changeSet>
 
-	<changeSet id="changing_component_trigger" author="Alex ILIE">
+	<changeSet id="changing_component_trigger" author="EOrganism">
 		<comment>Changing component trigger</comment>
 
 		<sql>
