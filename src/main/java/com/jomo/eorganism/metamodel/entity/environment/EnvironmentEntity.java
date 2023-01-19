@@ -1,4 +1,4 @@
-package com.jomo.eorganism.metamodel.entity.domain;
+package com.jomo.eorganism.metamodel.entity.environment;
 
 import com.jomo.eorganism.metamodel.entity.base.BaseEntity;
 import lombok.AccessLevel;
@@ -6,43 +6,40 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
-@Table(name = "domain")
+@Table(name = "environment")
 //@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 //@Setter
-public class DomainEntity extends BaseEntity  {
+public class EnvironmentEntity extends BaseEntity  {
 
     private String name;
     private String type;
     private String description;
     private String status;
+    private Date startDate;
+    private Date endDate;
 
-    public void setName(String name) {
-        this.name = name;
+    protected Date getStartDate() {
+        return startDate;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    protected Date getEndDate() {
+        return endDate;
     }
 
     @Override
     public String toString() {
-        return "DomainEntity{" +
+        return "EnvironmentEntity{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
+                ", startDate=" + startDate.toString() +
+                ", endDate=" + endDate.toString() +
                 '}';
     }
 }

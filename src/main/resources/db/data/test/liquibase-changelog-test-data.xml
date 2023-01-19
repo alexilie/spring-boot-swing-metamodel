@@ -4,7 +4,25 @@
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-	<changeSet id="domain-test-data" author="EOrganism" runOnChange="true" context="test-data">
+	<changeSet id="release-test-data" author="EOrganism Test Loader" runOnChange="true" context="test-data">
+		<comment>Create release table test data</comment>
+		<loadUpdateData file="csv/release.csv"
+						primaryKey="id"
+						tableName="release"
+						relativeToChangelogFile="true"
+						separator=";">
+		</loadUpdateData>
+	</changeSet>
+	<changeSet id="environment-test-data" author="EOrganism Test Loader" runOnChange="true" context="test-data">
+		<comment>Create release table test data</comment>
+		<loadUpdateData file="csv/environment.csv"
+						primaryKey="id"
+						tableName="environment"
+						relativeToChangelogFile="true"
+						separator=";">
+		</loadUpdateData>
+	</changeSet>
+	<changeSet id="domain-test-data" author="EOrganism Test Loader" runOnChange="true" context="test-data">
 		<comment>Create domain table test data</comment>
 		<loadUpdateData file="csv/domain.csv"
 						primaryKey="id"
@@ -13,35 +31,40 @@
 						separator=";">
 		</loadUpdateData>
 	</changeSet>
-	<changeSet id="system-test-data" author="EOrganism" runOnChange="true" context="test-data">
+	<changeSet id="system-test-data" author="EOrganism Test Loader" runOnChange="true" context="test-data">
 		<comment>Create system table test data</comment>
 		<loadUpdateData file="csv/system.csv"
 						primaryKey="id"
 						tableName="system"
 						relativeToChangelogFile="true"
 						separator=";">
-			<column name="domain_id" type="COMPUTED"/>
 		</loadUpdateData>
 	</changeSet>
-	<changeSet id="application-test-data" author="EOrganism" runOnChange="true" context="test-data">
+	<changeSet id="application-test-data" author="EOrganism Test Loader" runOnChange="true" context="test-data">
 		<comment>Create application table test data</comment>
 		<loadUpdateData file="csv/application.csv"
 						primaryKey="id"
 						tableName="application"
 						relativeToChangelogFile="true"
 						separator=";">
-			<column name="system_id" type="COMPUTED"/>
-			<column name="domain_id" type="COMPUTED"/>
 		</loadUpdateData>
 	</changeSet>
-	<changeSet id="component-test-data" author="EOrganism" runOnChange="true" context="test-data">
+	<changeSet id="component-test-data" author="EOrganism Test Loader" runOnChange="true" context="test-data">
 		<comment>Create component table test data</comment>
 		<loadUpdateData file="csv/component.csv"
 						primaryKey="id"
 						tableName="component"
 						relativeToChangelogFile="true"
 						separator=";">
-			<column name="application_id" type="COMPUTED"/>
+		</loadUpdateData>
+	</changeSet>
+	<changeSet id="database-test-data" author="EOrganism Test Loader" runOnChange="true" context="test-data">
+		<comment>Create database table test data</comment>
+		<loadUpdateData file="csv/database.csv"
+						primaryKey="id"
+						tableName="database"
+						relativeToChangelogFile="true"
+						separator=";">
 		</loadUpdateData>
 	</changeSet>
 </databaseChangeLog>

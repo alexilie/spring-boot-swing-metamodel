@@ -3,7 +3,6 @@ package com.jomo.eorganism.metamodel.entity.system;
 import com.jomo.eorganism.metamodel.entity.domain.DomainEntity;
 import com.jomo.eorganism.metamodel.entity.base.BaseEntity;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,22 +13,34 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "system")
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 //@Setter
 public class SystemEntity extends BaseEntity {
 
-    private String correlationId;
+    private String name;
+    private String type;
+    private String description;
+    private String status;
+    private String inventoryName;
+    private String shortName;
+    private String longName;
+    private String code;
+    private String classification;
 
-    @ManyToOne
-    @JoinColumn(name = "domain_id")
-    private DomainEntity application;
-
-    @Override
+      @Override
     public String toString() {
-        return "SystemEntity" +
-                ", correlationId='" + correlationId + '\'' +
-                 super.toString();
+        return "SystemEntity{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", inventoryName='" + inventoryName + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", longName='" + longName + '\'' +
+                ", code='" + code + '\'' +
+                ", classification='" + classification + '\'' +
+                '}';
     }
 }

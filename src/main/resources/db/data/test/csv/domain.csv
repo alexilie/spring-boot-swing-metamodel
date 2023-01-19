@@ -1,10 +1,10 @@
 name;type;description
 Customer Domain;Critical;Customer Relationship Domain
 Finance Domain;Critical;Financial Systems Domain
+Billing Domain;Critical;Billing Domain
 Wealth Management Domain;Critical;Wealth Management Investment and Trading Domain
 API Domain;Critical;API Middleware Domain
 ESF Domain;Critical;Enterprise Security Systems Domain
 ENS Domain;Critical;Enterprise Notification Systems Domain
 Digital Domain;Critical;Digital Channels Domain
-Billing Domain;Critical;Billing Domain
 HR Domain;Critical;HR Domain

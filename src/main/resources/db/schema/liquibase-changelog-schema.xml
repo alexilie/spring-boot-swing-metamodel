@@ -3,13 +3,12 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	<changeSet id="domain_table" author="EOrganism">
-		<comment>Create domain table</comment>
-		<createTable tableName="domain">
+
+	<changeSet id="release_table" author="EOrganism">
+		<comment>Create release table</comment>
+		<createTable tableName="release">
 			<column name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" primaryKeyName="domain_pkey"/>
-			</column>
-			<column name="correlation_id" type="VARCHAR(100)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="release_pkey"/>
 			</column>
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
@@ -20,29 +19,76 @@
 			<column name="description" type="VARCHAR(250)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="status" type="VARCHAR(30)">
+			<column name="status" type="VARCHAR(250)">
 			</column>
-			<column name="inventory_name" type="VARCHAR(250)">
+			<column name="release_date" type="TIMESTAMP">
 			</column>
-			<column name="short_name" type="VARCHAR(50)">
+		</createTable>
+		<createSequence sequenceName="release_seq"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="release_seq"
+						 tableName="release"/>
+	</changeSet>
+
+	<changeSet id="environment_table" author="EOrganism">
+		<comment>Create environment table</comment>
+		<createTable tableName="environment">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="environment_pkey"/>
 			</column>
-			<column name="long_name" type="VARCHAR(250)">
+			<column name="release_id" type="BIGINT">
+				<constraints nullable="false"/>
 			</column>
-			<column name="code" type="VARCHAR(30)">
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
 			</column>
-			<column name="classification" type="VARCHAR(50)">
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
 			</column>
-			<column name="last_updated_user_id" type="BIGINT">
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
 			</column>
-			<column name="last_updated_user_name" type="VARCHAR(100)">
+			<column name="start_date" type="TIMESTAMP">
 			</column>
-			<column name="last_updated_application_id" type="BIGINT">
+			<column name="end_date" type="TIMESTAMP">
 			</column>
-			<column name="last_updated_application_name" type="VARCHAR(100)">
+			<column name="status" type="VARCHAR(250)">
 			</column>
-			<column name="created_date" type="TIMESTAMP">
+		</createTable>
+		<createSequence sequenceName="environment_seq"/>
+		<createIndex tableName="environment" indexName="environment_release_idx">
+			<column name="release_id"/>
+		</createIndex>
+		<addForeignKeyConstraint baseTableName="environment"
+								 baseColumnNames="release_id"
+								 referencedTableName="release"
+								 referencedColumnNames="id"
+								 constraintName="environment_release_fk"
+								 deferrable="false"
+								 initiallyDeferred="false"
+								 onDelete="NO ACTION"
+								 onUpdate="NO ACTION"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="environment_seq"
+						 tableName="environment"/>
+	</changeSet>
+
+	<changeSet id="domain_table" author="EOrganism">
+		<comment>Create domain table</comment>
+		<createTable tableName="domain">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="domain_pkey"/>
 			</column>
-			<column name="last_updated_date" type="TIMESTAMP">
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="status" type="VARCHAR(250)">
 			</column>
 		</createTable>
 		<createSequence sequenceName="domain_seq"/>
@@ -50,14 +96,13 @@
 						 defaultValueSequenceNext="domain_seq"
 						 tableName="domain"/>
 	</changeSet>
+
 	<changeSet id="system_table" author="EOrganism">
 		<comment>Create system table</comment>
 		<createTable tableName="system">
 			<column name="id" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="system_pkey"/>
 			</column>
-			<column name="correlation_id" type="VARCHAR(100)">
-			</column>
 			<column name="domain_id" type="BIGINT">
 				<constraints nullable="false"/>
 			</column>
@@ -70,62 +115,70 @@
 			<column name="description" type="VARCHAR(250)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="status" type="VARCHAR(30)">
+			<column name="status" type="VARCHAR(100)">
 			</column>
 			<column name="inventory_name" type="VARCHAR(250)">
 			</column>
-			<column name="short_name" type="VARCHAR(50)">
+			<column name="short_name" type="VARCHAR(100)">
 			</column>
 			<column name="long_name" type="VARCHAR(250)">
 			</column>
-			<column name="code" type="VARCHAR(30)">
+			<column name="code" type="VARCHAR(100)">
 			</column>
-			<column name="classification" type="VARCHAR(50)">
-			</column>
-			<column name="last_updated_user_id" type="BIGINT">
-			</column>
-			<column name="last_updated_user_name" type="VARCHAR(100)">
-			</column>
-			<column name="last_updated_application_id" type="BIGINT">
-			</column>
-			<column name="last_updated_application_name" type="VARCHAR(100)">
-			</column>
-			<column name="created_date" type="TIMESTAMP">
-			</column>
-			<column name="last_updated_date" type="TIMESTAMP">
+			<column name="classification" type="VARCHAR(100)">
 			</column>
 		</createTable>
 		<createSequence sequenceName="system_seq"/>
 		<addDefaultValue columnName="id"
 						 defaultValueSequenceNext="system_seq"
 						 tableName="system"/>
-		<createIndex tableName="system" indexName="system_domain_idx">
-			<column name="domain_id"/>
-		</createIndex>
-		<addForeignKeyConstraint baseTableName="system"
-								 baseColumnNames="domain_id"
-								 referencedTableName="domain"
-								 referencedColumnNames="id"
-								 constraintName="system_domain_fk"
-								 deferrable="false"
-								 initiallyDeferred="false"
-								 onDelete="NO ACTION"
-								 onUpdate="NO ACTION"/>
+
 	</changeSet>
+
 	<changeSet id="application_table" author="EOrganism">
 		<comment>Create application table</comment>
 		<createTable tableName="application">
 			<column name="id" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="application_pkey"/>
 			</column>
-			<column name="correlation_id" type="VARCHAR(100)">
+			<column name="domain_id" type="BIGINT">
 			</column>
 			<column name="system_id" type="BIGINT">
-				<constraints nullable="false"/>
 			</column>
-			<column name="domain_id" type="BIGINT">
-				<constraints nullable="false"/>
+			<column name="release_id" type="BIGINT">
 			</column>
+			<column name="environment_id" type="BIGINT">
+			</column>
+			<column name="eapplication_id" type="BIGINT">
+			</column>
+			<column name="owner_id" type="BIGINT">
+			</column>
+			<column name="application_profile_id" type="BIGINT">
+			</column>
+			<column name="support_group_id" type="BIGINT">
+			</column>
+			<column name="eorganism_id" type="BIGINT">
+			</column>
+			<column name="metadata_id" type="BIGINT">
+			</column>
+			<column name="segment_id" type="BIGINT">
+			</column>
+			<column name="business_unit_id" type="BIGINT">
+			</column>
+			<column name="last_updated_user_id" type="BIGINT">
+			</column>
+			<column name="last_updated_application_id" type="BIGINT">
+			</column>
+
+			<column name="domain_name" type="VARCHAR(200)">
+			</column>
+			<column name="system_name" type="VARCHAR(200)">
+			</column>
+			<column name="release_name" type="VARCHAR(200)">
+			</column>
+			<column name="environment_name" type="VARCHAR(200)">
+			</column>
+
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
 			</column>
@@ -135,58 +188,103 @@
 			<column name="description" type="VARCHAR(250)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="status" type="VARCHAR(30)">
+
+			<column name="status" type="VARCHAR(100)">
 			</column>
 			<column name="inventory_name" type="VARCHAR(250)">
 			</column>
-			<column name="short_name" type="VARCHAR(50)">
+			<column name="short_name" type="VARCHAR(100)">
 			</column>
 			<column name="long_name" type="VARCHAR(250)">
 			</column>
-			<column name="code" type="VARCHAR(30)">
+			<column name="code" type="VARCHAR(100)">
 			</column>
-			<column name="classification" type="VARCHAR(50)">
+			<column name="classification" type="VARCHAR(100)">
 			</column>
-			<column name="last_updated_user_id" type="BIGINT">
+
+			<column name="owner_name" type="VARCHAR(100)">
 			</column>
+			<column name="support_group_name" type="VARCHAR(200)">
+			</column>
+			<column name="support_group_email" type="VARCHAR(150)">
+			</column>
+
+			<column name="eapplication_name" type="VARCHAR(100)">
+			</column>
+
+			<column name="application_profile_name" type="VARCHAR(100)">
+			</column>
+			<column name="application_id_input" type="VARCHAR(300)">
+			</column>
+			<column name="application_id_input_name" type="VARCHAR(1000)">
+			</column>
+			<column name="application_id_output" type="VARCHAR(100)">
+			</column>
+			<column name="application_id_output_name" type="VARCHAR(100)">
+			</column>
+
+			<column name="eorganism_name" type="VARCHAR(100)">
+			</column>
+			<column name="taxonomy" type="VARCHAR(500)">
+			</column>
+			<column name="topology" type="VARCHAR(500)">
+			</column>
+			<column name="graph_path" type="VARCHAR(500)">
+			</column>
+
+			<column name="segment_name" type="VARCHAR(100)">
+			</column>
+
+			<column name="metadata_name" type="VARCHAR(100)">
+			</column>
+			<column name="metadata_type" type="VARCHAR(100)">
+			</column>
+			<column name="service_code" type="VARCHAR(100)">
+			</column>
+
+			<column name="business_unit_name" type="VARCHAR(200)">
+			</column>
+			<column name="version" type="VARCHAR(100)">
+			</column>
+
+
 			<column name="last_updated_user_name" type="VARCHAR(100)">
 			</column>
-			<column name="last_updated_application_id" type="BIGINT">
-			</column>
+
 			<column name="last_updated_application_name" type="VARCHAR(100)">
 			</column>
 			<column name="created_date" type="TIMESTAMP">
 			</column>
 			<column name="last_updated_date" type="TIMESTAMP">
 			</column>
+
 		</createTable>
 		<createSequence sequenceName="application_seq"/>
 		<addDefaultValue columnName="id"
 						 defaultValueSequenceNext="application_seq"
 						 tableName="application"/>
-		<createIndex tableName="application" indexName="application_system_idx">
-			<column name="system_id"/>
-		</createIndex>
-		<addForeignKeyConstraint baseTableName="application"
-								 baseColumnNames="system_id"
-								 referencedTableName="system"
-								 referencedColumnNames="id"
-								 constraintName="application_system_fk"
-								 deferrable="false"
-								 initiallyDeferred="false"
-								 onDelete="NO ACTION"
-								 onUpdate="NO ACTION"/>
+
 	</changeSet>
+
 	<changeSet id="component_table" author="EOrganism">
 		<comment>Create component table</comment>
 		<createTable tableName="component">
 			<column name="id" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="component_pkey"/>
 			</column>
-			<column name="correlation_id" type="VARCHAR(100)">
+			<column name="metadata_id" type="BIGINT">
+			</column>
+			<column name="eorganism_id" type="BIGINT">
 			</column>
 			<column name="application_id" type="BIGINT">
 				<constraints nullable="false"/>
+			</column>
+			<column name="last_updated_user_id" type="BIGINT">
+			</column>
+			<column name="last_updated_application_id" type="BIGINT">
+			</column>
+
+			<column name="application_name" type="VARCHAR(100)">
 			</column>
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
@@ -201,20 +299,37 @@
 			</column>
 			<column name="inventory_name" type="VARCHAR(250)">
 			</column>
-			<column name="short_name" type="VARCHAR(50)">
+			<column name="short_name" type="VARCHAR(100)">
 			</column>
 			<column name="long_name" type="VARCHAR(250)">
 			</column>
-			<column name="code" type="VARCHAR(30)">
+			<column name="code" type="VARCHAR(100)">
 			</column>
-			<column name="classification" type="VARCHAR(50)">
+			<column name="classification" type="VARCHAR(100)">
 			</column>
-			<column name="last_updated_user_id" type="BIGINT">
+
+			<column name="eorganism_name" type="VARCHAR(100)">
 			</column>
+			<column name="taxonomy" type="VARCHAR(500)">
+			</column>
+			<column name="topology" type="VARCHAR(500)">
+			</column>
+			<column name="graph_path" type="VARCHAR(500)">
+			</column>
+
+			<column name="metadata_name" type="VARCHAR(100)">
+			</column>
+			<column name="metadata_type" type="VARCHAR(100)">
+			</column>
+			<column name="service_code" type="VARCHAR(100)">
+			</column>
+			<column name="version" type="VARCHAR(100)">
+			</column>
+
+
 			<column name="last_updated_user_name" type="VARCHAR(100)">
 			</column>
-			<column name="last_updated_application_id" type="BIGINT">
-			</column>
+
 			<column name="last_updated_application_name" type="VARCHAR(100)">
 			</column>
 			<column name="created_date" type="TIMESTAMP">
@@ -226,19 +341,149 @@
 		<addDefaultValue columnName="id"
 						 defaultValueSequenceNext="component_seq"
 						 tableName="component"/>
-		<createIndex tableName="component" indexName="component_application_idx">
-			<column name="application_id"/>
-		</createIndex>
-		<addForeignKeyConstraint baseTableName="component"
-								 baseColumnNames="application_id"
-								 referencedTableName="application"
-								 referencedColumnNames="id"
-								 constraintName="component_application_fk"
-								 deferrable="false"
-								 initiallyDeferred="false"
-								 onDelete="NO ACTION"
-								 onUpdate="NO ACTION"/>
+
 	</changeSet>
+
+	<changeSet id="database_table" author="EOrganism">
+		<comment>Create database table</comment>
+		<createTable tableName="database">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="database_pkey"/>
+			</column>
+			<column name="domain_id" type="BIGINT">
+			</column>
+			<column name="system_id" type="BIGINT">
+			</column>
+			<column name="release_id" type="BIGINT">
+			</column>
+			<column name="environment_id" type="BIGINT">
+			</column>
+			<column name="application_id" type="BIGINT">
+			</column>
+			<column name="metadata_id" type="BIGINT">
+			</column>
+			<column name="eorganism_id" type="BIGINT">
+			</column>
+			<column name="owner_id" type="BIGINT">
+			</column>
+			<column name="segment_id" type="BIGINT">
+			</column>
+			<column name="business_unit_id" type="BIGINT">
+			</column>
+			<column name="support_group_id" type="BIGINT">
+			</column>
+			<column name="last_updated_user_id" type="BIGINT">
+			</column>
+			<column name="last_updated_application_id" type="BIGINT">
+			</column>
+
+			<column name="domain_name" type="VARCHAR(200)">
+			</column>
+			<column name="system_name" type="VARCHAR(200)">
+			</column>
+			<column name="release_name" type="VARCHAR(200)">
+			</column>
+			<column name="environment_name" type="VARCHAR(200)">
+			</column>
+			<column name="application_name" type="VARCHAR(200)">
+			</column>
+
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="VARCHAR(250)">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="vendor_name" type="VARCHAR(100)">
+			</column>
+			<column name="database_version" type="VARCHAR(100)">
+			</column>
+			<column name="status" type="VARCHAR(30)">
+			</column>
+			<column name="inventory_name" type="VARCHAR(250)">
+			</column>
+			<column name="short_name" type="VARCHAR(100)">
+			</column>
+			<column name="long_name" type="VARCHAR(250)">
+			</column>
+			<column name="code" type="VARCHAR(100)">
+			</column>
+			<column name="classification" type="VARCHAR(100)">
+			</column>
+			<column name="url" type="VARCHAR(300)">
+			</column>
+
+			<column name="owner_name" type="VARCHAR(100)">
+			</column>
+			<column name="support_group_name" type="VARCHAR(200)">
+			</column>
+			<column name="support_group_email" type="VARCHAR(150)">
+			</column>
+
+			<column name="application_id_input" type="VARCHAR(300)">
+			</column>
+			<column name="application_id_input_name" type="VARCHAR(1000)">
+			</column>
+			<column name="application_id_output" type="VARCHAR(100)">
+			</column>
+			<column name="application_id_output_name" type="VARCHAR(100)">
+			</column>
+
+			<column name="database_id_input" type="VARCHAR(300)">
+			</column>
+			<column name="database_id_input_name" type="VARCHAR(1000)">
+			</column>
+			<column name="database_id_output" type="VARCHAR(100)">
+			</column>
+			<column name="database_id_output_name" type="VARCHAR(100)">
+			</column>
+
+			<column name="eorganism_name" type="VARCHAR(100)">
+			</column>
+			<column name="taxonomy" type="VARCHAR(500)">
+			</column>
+			<column name="topology" type="VARCHAR(500)">
+			</column>
+			<column name="graph_path" type="VARCHAR(500)">
+			</column>
+
+			<column name="segment_name" type="VARCHAR(100)">
+			</column>
+
+			<column name="metadata_name" type="VARCHAR(100)">
+			</column>
+			<column name="metadata_type" type="VARCHAR(100)">
+			</column>
+			<column name="service_code" type="VARCHAR(100)">
+			</column>
+
+			<column name="business_unit_name" type="VARCHAR(200)">
+			</column>
+			<column name="version" type="VARCHAR(100)">
+			</column>
+
+			<column name="last_updated_user_name" type="VARCHAR(100)">
+			</column>
+			<column name="last_updated_application_name" type="VARCHAR(100)">
+			</column>
+			<column name="created_date" type="TIMESTAMP">
+			</column>
+			<column name="last_updated_date" type="TIMESTAMP">
+			</column>
+
+		</createTable>
+
+		<createSequence sequenceName="database_seq"/>
+		<addDefaultValue columnName="id"
+						 defaultValueSequenceNext="database_seq"
+						 tableName="database"/>
+
+	</changeSet>
+
 	<changeSet id="application_history_table" author="EOrganism">
 		<comment>Create application history table</comment>
 

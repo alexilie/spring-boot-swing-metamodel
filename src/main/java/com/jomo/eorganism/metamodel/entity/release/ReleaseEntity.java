@@ -1,48 +1,40 @@
-package com.jomo.eorganism.metamodel.entity.domain;
+package com.jomo.eorganism.metamodel.entity.release;
 
 import com.jomo.eorganism.metamodel.entity.base.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
-@Table(name = "domain")
+@Table(name = "release")
 //@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 //@Setter
-public class DomainEntity extends BaseEntity  {
+public class ReleaseEntity extends BaseEntity  {
 
     private String name;
     private String type;
     private String description;
     private String status;
+    private Date releaseDate;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    protected Date getReleaseDate() {
+        return releaseDate;
     }
 
     @Override
     public String toString() {
-        return "DomainEntity{" +
+        return "ReleaseEntity{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
+                ", releaseDate=" + releaseDate.toString() +
                 '}';
     }
 }

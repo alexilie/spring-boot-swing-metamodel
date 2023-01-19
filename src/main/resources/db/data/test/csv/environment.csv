@@ -1,0 +1,16 @@
+name;type;description;release_id
+PRODUCTION_DR_CLOUD;PROD;Production Disaster Recovery Cloud System;1
+PRODUCTION_DR_ON_PREM;PROD;Production Disaster Recovery On Premises System;1
+PRODUCTION_HYBRID_CLOUD;PROD;Production HYBRID CLOUD;1
+PRODUCTION;PROD;Production System;1
+SIT_INT_ENV17;SIT;System Integrated Environment ENV17;2
+DEV_INT_ENV17;SIT;Development Integrated Environment ENV17;2
+SIT_INT_ENV30;SIT;System Integrated Environment ENV30;2
+DEV_INT_ENV45;SIT;Development Integrated Environment ENV45;2
+PT_INT_ENV55;PT;Performance Testing Environment ENV55;4
+PT_INT_ENV65;PT;Development Integrated Environment ENV65;4
+BAT_INT_ENV70;BAT;Business Acceptance Testing Environment ENV55;5
+BAT_INT_ENV80;BAT;Business Acceptance TestingEnvironment ENV65;5
+BC_INT_ENV90;BAT;Business Continuity Environment ENV55;5
+BC_INT_ENV100;BAT;Business Continuity TestingEnvironment ENV65;5
+

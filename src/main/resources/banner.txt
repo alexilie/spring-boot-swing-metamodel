@@ -7,7 +7,7 @@
 |_|       |_|  \____/  |  \_____|_ |      |      |  \_____/   \_____ / \____/   | Spring Boot version = ${spring-boot.version}
 
 EOrganism Metamodel Application build using
-Spring Boot, Java, Liquibase, PostPreSQL, Heroku Cloud, hibernate, Microservices, REST API, JPA, Hibernate
+Spring Boot, Java, Liquibase, PostPreSQL, Heroku Cloud, Hibernate, Microservices, REST API, JPA, Hibernate
 
 
 
