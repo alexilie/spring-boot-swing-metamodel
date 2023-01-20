@@ -1,6 +1,6 @@
 package com.jomo.eorganism.metamodel.controller;
 
-import com.jomo.eorganism.metamodel.model.JModelFrame;
+import com.jomo.eorganism.metamodel.model.MetamodelFrame;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 @AllArgsConstructor
 public class ApplicationController {
     public static void initialize() {
-        JModelFrame applicationGUIModelFrame = new JModelFrame();
+        MetamodelFrame applicationGUIModelFrame = new MetamodelFrame();
         applicationGUIModelFrame.initialize();
     } //initialize
 } // end class

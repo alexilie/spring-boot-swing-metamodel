@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 
 @SpringBootApplication
 public class MetamodelApplication {
-    //private static final org.apache.logging.log4j.Logger logWorker = org.apache.logging.log4j.LogManager.getLogger(MetamodelApplication.class.getName());
+    //private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(MetamodelApplication.class.getName());
 
     public static void main(String[] args) {
         //setup L&F
