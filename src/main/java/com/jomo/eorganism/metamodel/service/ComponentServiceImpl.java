@@ -2,7 +2,6 @@ package com.jomo.eorganism.metamodel.service;
 
 import com.jomo.eorganism.metamodel.entity.ComponentEntity;
 import com.jomo.eorganism.metamodel.repository.ComponentRepository;
-import com.jomo.eorganism.metamodel.service.ComponentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

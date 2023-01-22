@@ -19,8 +19,6 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import com.jomo.eorganism.metamodel.config.ApplicationConfiguration;
-import javafx.scene.layout.BorderStroke;
-import lombok.Getter;
 
 public class MetamodelFrame extends JFrame {
     private JMenu          fileMenu;

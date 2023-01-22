@@ -87,6 +87,4 @@ public class ApplicationConfiguration {
     public static final Font  attributeFont = new Font("New Font", Font.TRUETYPE_FONT, 11);
     public static final String APPLICATION_FRAME_NAME =  "EORGANISM MetaModel :: Enterprise Architecture :: Main";
 
-
-
 }

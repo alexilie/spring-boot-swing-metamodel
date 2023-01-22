@@ -1,6 +1,7 @@
 package com.jomo.eorganism.metamodel.service;
 
 import java.util.Optional;
+
 import com.jomo.eorganism.metamodel.entity.ApplicationEntity;
 import com.jomo.eorganism.metamodel.util.TransactionalReadOnly;
 import com.jomo.eorganism.metamodel.util.TransactionalWrite;

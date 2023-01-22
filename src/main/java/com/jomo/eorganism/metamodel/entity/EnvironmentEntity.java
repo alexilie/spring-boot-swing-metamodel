@@ -1,6 +1,5 @@
 package com.jomo.eorganism.metamodel.entity;
 
-import com.jomo.eorganism.metamodel.entity.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
