@@ -80,9 +80,8 @@ public class MetamodelApplication {
             ReleaseEntity releaseEntityWorker;
             EnvironmentEntity environmentEntityWorker;
             MetadataEntity metadataEntityWorker;
-            //1
-            applicationEntityWorker = new ApplicationEntity("Jomo Metamodel Spring Boot Admin", "Defect Tracking", "Jomo Trackzilla Defect tracking Application for tracking bugs");
 
+            applicationEntityWorker = new ApplicationEntity("Jomo Metamodel Spring Boot Admin", "Defect Tracking", "Jomo Trackzilla Defect tracking Application for tracking bugs");
             componentEntityWorker = new ComponentEntity("Jomo Spring Boot Admin", "Defect Tracking", "Jomo Trackzilla Web GUI Admin component");
             databaseEntityWorker = new DatabaseEntity("Jomo Spring Boot Admine", "Oracle Cloud", "Jomo Trackzilla Database");
             domainEntityWorker = new DomainEntity("Billing Domain Spring Boot Admin", "Billing", "Business Banking Billing Domain");
@@ -142,6 +141,42 @@ public class MetamodelApplication {
             metadataEntityWorker.setOriginalId(applicationEntityWorker.getId());
             metadataEntityWorker.setLastUpdatedApplicationName(applicationEntityWorker.getLastUpdatedApplicationName());
             metadataEntityWorker.setLastUpdatedUserName(applicationEntityWorker.getLastUpdatedUserName());
+
+            metadataRepository.save(metadataEntityWorker);
+            //reset
+            metadataEntityWorker = new MetadataEntity("METADATA", "METADATA", "METADATA DESC");
+
+            metadataEntityWorker.setName(componentEntityWorker.getName());
+            metadataEntityWorker.setType(componentEntityWorker.getMetadataType());
+            metadataEntityWorker.setDescription(componentEntityWorker.getDescription());
+            metadataEntityWorker.setOriginalId(componentEntityWorker.getId());
+            metadataEntityWorker.setLastUpdatedApplicationName(componentEntityWorker.getLastUpdatedApplicationName());
+            metadataEntityWorker.setLastUpdatedUserName(componentEntityWorker.getLastUpdatedUserName());
+
+            metadataRepository.save(metadataEntityWorker);
+            //reset
+            metadataEntityWorker = new MetadataEntity("METADATA", "METADATA", "METADATA DESC");
+
+            metadataEntityWorker.setName(databaseEntityWorker.getName());
+            metadataEntityWorker.setType(databaseEntityWorker.getMetadataType());
+            metadataEntityWorker.setDescription(databaseEntityWorker.getDescription());
+            metadataEntityWorker.setOriginalId(databaseEntityWorker.getId());
+            metadataEntityWorker.setLastUpdatedApplicationName(databaseEntityWorker.getLastUpdatedApplicationName());
+            metadataEntityWorker.setLastUpdatedUserName(databaseEntityWorker.getLastUpdatedUserName());
+
+            metadataRepository.save(metadataEntityWorker);
+
+            //reset
+            metadataEntityWorker = new MetadataEntity("METADATA", "METADATA", "METADATA DESC");
+
+            metadataEntityWorker.setName(systemEntityWorker.getName());
+            metadataEntityWorker.setType(systemEntityWorker.getMetadataType());
+            metadataEntityWorker.setDescription(systemEntityWorker.getDescription());
+            metadataEntityWorker.setOriginalId(systemEntityWorker.getId());
+            metadataEntityWorker.setLastUpdatedApplicationName(systemEntityWorker.getLastUpdatedApplicationName());
+            metadataEntityWorker.setLastUpdatedUserName(systemEntityWorker.getLastUpdatedUserName());
+
+            metadataRepository.save(metadataEntityWorker);
 
             for (ReleaseEntity releaseEntity : releaseRepository.findAll()) {
                 logger.info("The release is: " + releaseEntity.toString());

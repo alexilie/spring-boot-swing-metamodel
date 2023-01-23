@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 @Table(name = "database")
 //@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 //@Setter
 public class DatabaseEntity extends BaseEntity  {
@@ -96,6 +96,66 @@ public class DatabaseEntity extends BaseEntity  {
 
     protected void setLastUpdatedDate(Date lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLastUpdatedUserName() {
+        return lastUpdatedUserName;
+    }
+
+    public void setLastUpdatedUserName(String lastUpdatedUserName) {
+        this.lastUpdatedUserName = lastUpdatedUserName;
+    }
+
+    public String getLastUpdatedApplicationName() {
+        return lastUpdatedApplicationName;
+    }
+
+    public void setLastUpdatedApplicationName(String lastUpdatedApplicationName) {
+        this.lastUpdatedApplicationName = lastUpdatedApplicationName;
+    }
+
+    public String getMetadataType() {
+        return metadataType;
+    }
+
+    public void setMetadataType(String metadataType) {
+        this.metadataType = metadataType;
+    }
+
+    public DatabaseEntity() {
+
     }
 
     public DatabaseEntity(String name, String type, String description) {
