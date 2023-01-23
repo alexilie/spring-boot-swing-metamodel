@@ -1,43 +1,27 @@
 package com.jomo.eorganism.metamodel.entity;
 
-import com.jomo.eorganism.metamodel.config.ApplicationConfiguration;
 import com.jomo.eorganism.metamodel.util.MetamodelUtil;
 import lombok.AccessLevel;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "application")
+@Table(name = "metadata")
 //@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 //@Setter
-public class ApplicationEntity extends BaseEntity  {
+public class MetadataEntity extends BaseEntity  {
     private String uuid;
-
-    private Long domainId;
-    private Long systemId;
-    private Long environmentId;
-    private Long releaseId;
-    private Long applicationProfileId;
-    private Long ownerId;
-    private Long eorganismId;
-    private Long supportGroupId;
-    private Long segmentId;
     private Long metadataId;
-    private Long businessUnitId;
-    private Long eapplicationId;
+    private Long originalId;
+    private String originalUuid;
     private Long lastUpdatedUserId;
     private Long lastUpdatedApplicationId;
-
-    private String environmentName;
-    private String releaseName;
-    private String domainName;
-    private String systemName;
 
     private String name;
     private String type;
@@ -51,25 +35,8 @@ public class ApplicationEntity extends BaseEntity  {
     private String ownerName;
     private String supportGroupName;
     private String supportGroupEmail;
-    private String eapplicationName;
-    private String applicationProfileName;
-    private String applicationIdInput;
-    private String applicationIdInputName;
-    private String applicationIdOutput;
-    private String applicationIdOutputName;
-
-    private String eorganismName;
-    private String taxonomy;
-    private String topology;
-    private String graphPath;
 
     private String segmentName;
-
-    private String metadataName;
-    private String metadataType;
-    private String serviceCode;
-    private String businessUnitName;
-    private String version;
 
     private String lastUpdatedUserName;
     private String lastUpdatedApplicationName;
@@ -100,6 +67,30 @@ public class ApplicationEntity extends BaseEntity  {
         this.metadataId = metadataId;
     }
 
+    public Long getOriginalId() {
+        return originalId;
+    }
+
+    public void setOriginalId(Long originalId) {
+        this.originalId = originalId;
+    }
+
+    public Long getLastUpdatedUserId() {
+        return lastUpdatedUserId;
+    }
+
+    public void setLastUpdatedUserId(Long lastUpdatedUserId) {
+        this.lastUpdatedUserId = lastUpdatedUserId;
+    }
+
+    public Long getLastUpdatedApplicationId() {
+        return lastUpdatedApplicationId;
+    }
+
+    public void setLastUpdatedApplicationId(Long lastUpdatedApplicationId) {
+        this.lastUpdatedApplicationId = lastUpdatedApplicationId;
+    }
+
     public String getName() {
         return name;
     }
@@ -124,20 +115,84 @@ public class ApplicationEntity extends BaseEntity  {
         this.description = description;
     }
 
-    public String getMetadataName() {
-        return metadataName;
+    public String getStatus() {
+        return status;
     }
 
-    public void setMetadataName(String metadataName) {
-        this.metadataName = metadataName;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getMetadataType() {
-        return metadataType;
+    public String getInventoryName() {
+        return inventoryName;
     }
 
-    public void setMetadataType(String metadataType) {
-        this.metadataType = metadataType;
+    public void setInventoryName(String inventoryName) {
+        this.inventoryName = inventoryName;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getLongName() {
+        return longName;
+    }
+
+    public void setLongName(String longName) {
+        this.longName = longName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setClassification(String classification) {
+        this.classification = classification;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getSupportGroupName() {
+        return supportGroupName;
+    }
+
+    public void setSupportGroupName(String supportGroupName) {
+        this.supportGroupName = supportGroupName;
+    }
+
+    public String getSupportGroupEmail() {
+        return supportGroupEmail;
+    }
+
+    public void setSupportGroupEmail(String supportGroupEmail) {
+        this.supportGroupEmail = supportGroupEmail;
+    }
+
+    public String getSegmentName() {
+        return segmentName;
+    }
+
+    public void setSegmentName(String segmentName) {
+        this.segmentName = segmentName;
     }
 
     public String getLastUpdatedUserName() {
@@ -156,9 +211,27 @@ public class ApplicationEntity extends BaseEntity  {
         this.lastUpdatedApplicationName = lastUpdatedApplicationName;
     }
 
-    public ApplicationEntity(String name, String type, String description) {
+    public MetadataEntity() {
+    }
+
+    public String getOriginalUuid() {
+        return originalUuid;
+    }
+
+    public void setOriginalUuid(String originalUuid) {
+        this.originalUuid = originalUuid;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public MetadataEntity(String name, String type, String description) {
         this.uuid        = MetamodelUtil.getUuidRandomString();
-        this.metadataType = ApplicationConfiguration.APPLICATION;
         this.lastUpdatedApplicationName = "Metamodel Spring Boot";
         this.lastUpdatedUserName = "eorganism";
         this.name        = name;
@@ -170,26 +243,13 @@ public class ApplicationEntity extends BaseEntity  {
 
     @Override
     public String toString() {
-        return "ApplicationEntity{" + '\'' +
+        return "MetadataEntity{" +
                 super.toString() + '\'' +
                 "uuid=" + uuid +
-                "domainId=" + domainId +
-                ", systemId=" + systemId +
-                ", environmentId=" + environmentId +
-                ", releaseId=" + releaseId +
-                ", applicationProfileId=" + applicationProfileId +
-                ", ownerId=" + ownerId +
-                ", eorganismId=" + eorganismId +
-                ", supportGroupId=" + supportGroupId +
-                ", segmentId=" + segmentId +
-                ", metadataId=" + metadataId +
-                ", businessUnitId=" + businessUnitId +
-                ", eapplicationId=" + eapplicationId +
+                "metadata_id=" + metadataId +
+                ", original_id=" + originalId +
                 ", lastUpdatedUserId=" + lastUpdatedUserId +
-                ", environmentName='" + environmentName + '\'' +
-                ", releaseName='" + releaseName + '\'' +
-                ", domainName='" + domainName + '\'' +
-                ", systemName='" + systemName + '\'' +
+                ", lastUpdatedApplicationId=" + lastUpdatedApplicationId +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
@@ -202,25 +262,9 @@ public class ApplicationEntity extends BaseEntity  {
                 ", ownerName='" + ownerName + '\'' +
                 ", supportGroupName='" + supportGroupName + '\'' +
                 ", supportGroupEmail='" + supportGroupEmail + '\'' +
-                ", eapplicationName='" + eapplicationName + '\'' +
-                ", applicationProfileName='" + applicationProfileName + '\'' +
-                ", applicationIdInput='" + applicationIdInput + '\'' +
-                ", applicationIdInputName='" + applicationIdInputName + '\'' +
-                ", applicationIdOutput='" + applicationIdOutput + '\'' +
-                ", applicationIdOutputName='" + applicationIdOutputName + '\'' +
-                ", eorganismName='" + eorganismName + '\'' +
-                ", taxonomy='" + taxonomy + '\'' +
-                ", topology='" + topology + '\'' +
-                ", graphPath='" + graphPath + '\'' +
                 ", segmentName='" + segmentName + '\'' +
-                ", metadataName='" + metadataName + '\'' +
-                ", metadataType='" + metadataType + '\'' +
-                ", serviceCode='" + serviceCode + '\'' +
-                ", businessUnitName='" + businessUnitName + '\'' +
-                ", version='" + version + '\'' +
                 ", lastUpdatedUserName='" + lastUpdatedUserName + '\'' +
                 ", lastUpdatedApplicationName='" + lastUpdatedApplicationName + '\'' +
-                ", lastUpdatedApplicationId=" + lastUpdatedApplicationId +
                 ", createdDate=" + createdDate +
                 ", lastUpdatedDate=" + lastUpdatedDate +
                 '}';

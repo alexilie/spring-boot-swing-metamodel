@@ -1,0 +1,7 @@
+name;type;description
+CRM Application;APPLICATION;CRM Application Description
+OBS Billing Application;APPLICATION;OBS Billing Application Description
+IVR Application;APPLICATION;IVR Application Description
+Salesforce Application;APPLICATION;Salesforce Application Description
+SAP Application;APPLICATION;SAP Application Description
+AWS Application;APPLICATION;AWS Application Description

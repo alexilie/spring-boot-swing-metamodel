@@ -67,4 +67,13 @@
 						separator=";">
 		</loadUpdateData>
 	</changeSet>
+	<changeSet id="metadata-test-data" author="EOrganism Test Loader" runOnChange="true" context="test-data">
+		<comment>Create metadata table test data</comment>
+		<loadUpdateData file="csv/metadata.csv"
+						primaryKey="id"
+						tableName="metadata"
+						relativeToChangelogFile="true"
+						separator=";">
+		</loadUpdateData>
+	</changeSet>
 </databaseChangeLog>

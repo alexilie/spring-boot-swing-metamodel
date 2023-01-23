@@ -1,5 +1,7 @@
 package com.jomo.eorganism.metamodel.entity;
 
+import com.jomo.eorganism.metamodel.config.ApplicationConfiguration;
+import com.jomo.eorganism.metamodel.util.MetamodelUtil;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,7 @@ import java.util.Date;
 @Getter
 //@Setter
 public class DatabaseEntity extends BaseEntity  {
-
+    private String uuid;
     private Long domainId;
     private Long systemId;
     private Long environmentId;
@@ -88,9 +90,31 @@ public class DatabaseEntity extends BaseEntity  {
         return lastUpdatedDate;
     }
 
+    protected void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    protected void setLastUpdatedDate(Date lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public DatabaseEntity(String name, String type, String description) {
+        this.uuid        = MetamodelUtil.getUuidRandomString();
+        this.metadataType = ApplicationConfiguration.DATABASE;
+        this.lastUpdatedApplicationName = "Metamodel Spring Boot";
+        this.lastUpdatedUserName = "eorganism";
+        this.name        = name;
+        this.type        = type;
+        this.description = description;
+        this.createdDate = new java.util.Date();
+        this.lastUpdatedDate = new java.util.Date();
+    }
+
     @Override
     public String toString() {
-        return "DatabaseEntity{" +
+        return "DatabaseEntity{" + '\'' +
+                super.toString() + '\'' +
+                "uuid=" + uuid +
                 "domainId=" + domainId +
                 ", systemId=" + systemId +
                 ", environmentId=" + environmentId +

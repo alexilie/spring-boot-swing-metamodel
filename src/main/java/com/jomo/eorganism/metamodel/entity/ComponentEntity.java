@@ -1,5 +1,7 @@
 package com.jomo.eorganism.metamodel.entity;
 
+import com.jomo.eorganism.metamodel.config.ApplicationConfiguration;
+import com.jomo.eorganism.metamodel.util.MetamodelUtil;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,7 @@ import java.util.Date;
 @Getter
 //@Setter
 public class ComponentEntity extends BaseEntity {
-
+    private String uuid;
     private Long applicationId;
     private Long eorganismId;
     private Long metadataId;
@@ -57,9 +59,39 @@ public class ComponentEntity extends BaseEntity {
         return lastUpdatedDate;
     }
 
+    public Long getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(Long applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    protected void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    protected void setLastUpdatedDate(Date lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public ComponentEntity(String name, String type, String description) {
+        this.uuid        = MetamodelUtil.getUuidRandomString();
+        this.metadataType = ApplicationConfiguration.COMPONENT;
+        this.lastUpdatedApplicationName = "Metamodel Spring Boot";
+        this.lastUpdatedUserName = "eorganism";
+        this.name        = name;
+        this.type        = type;
+        this.description = description;
+        this.createdDate = new java.util.Date();
+        this.lastUpdatedDate = new java.util.Date();
+    }
+
     @Override
     public String toString() {
-        return "ComponentEntity{" +
+        return "ComponentEntity{" + '\'' +
+                super.toString() + '\'' +
+                "uuid=" + uuid +
                 "applicationId=" + applicationId +
                 ", eorganismId=" + eorganismId +
                 ", metadataId=" + metadataId +
