@@ -6,3 +6,17 @@ SalesForce API Web;Critical;Customer Resource Management Web;1;1
 SalesForce Backend;Critical;Customer Resource Management Web;1;1
 CRM;Critical;Customer Resource Management;1;1
 CRM Backend;Critical;Customer Resource Management;1;1
+Personal Mobile App;Critical;Mobile & Web Digital Channels;1;1
+Investment Mobile App;Critical;Mobile & Web Digital Channels;1;1
+Financing Mobile App;Critical;Mobile & Web Digital Channels;1;1
+Customer Support Mobile App;Critical;Mobile & Web Digital Channels;1;1
+Personal Customer Onboarding App;Critical;Mobile & Web Digital Channels;1;1
+Business Mobile App;Critical;Mobile & Web Digital Channels;1;1
+Business Investment Mobile App;Critical;Mobile & Web Digital Channels;1;1
+BusinessFinancing Mobile App;Critical;Mobile & Web Digital Channels;1;1
+BusinessCustomer Support Mobile App;Critical;Mobile & Web Digital Channels;1;1
+Business Customer Onboarding App;Critical;Mobile & Web Digital Channels;1;1
+SAP Finance App;Critical;Finance Applications;1;1
+SAP Wealth App;Critical;Wealth Applications;1;1
+Trading App;Critical;Trading Application;1;1
+Mobile REST API App;Critical;Middleware Application;1;1

@@ -8,3 +8,5 @@ ESF Domain;Critical;Enterprise Security Systems Domain
 ENS Domain;Critical;Enterprise Notification Systems Domain
 Digital Domain;Critical;Digital Channels Domain
 HR Domain;Critical;HR Domain
+API Domain;Critical;API Domain
+Enterprise Scheduler Domain;Critical;Batch Enterprise Scheduler Domain

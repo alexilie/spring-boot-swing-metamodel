@@ -1,10 +1,12 @@
 name;type;description
 PRODUCTION CURRENT;PROD_CURRENT; Existing Release in Current Production
 Release R2023_01;R01;R2023_01 2023 Jan Cobra Release
+Release R2024_01;R01;R2024_01 2024 Jan Alfa Release
 Release R2023_06;R06;R2023_06 Jun Tribeca Release
 Release R2023_10;R10;R2023_10 Oct Alpine Release
 Release R2023_03_SUPPORT;R03; R2023_03_SUPPORT Mar Support Release
 QA Release R2023_03_SUPPORT;QA; QA Release
 SIT Release R2023_03_SUPPORT;SIT; SIT Release
 PT Release R2023_03_SUPPORT;PT; PT Release
+PT Release R2024_03_SUPPORT;PT; PT Release
 NO RELEASE;STAND ALONE; NO RELEASE

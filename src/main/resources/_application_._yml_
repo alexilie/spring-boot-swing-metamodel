@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-  h2:
-    console:
-      enabled: true
+    driver-class-name: 'org.postgresql.Driver'
+    jdbc-url: 'jdbc:postgresql://localhost:5432/eorganism'
+    username: 'eorganism'
+    password: 'alex1900'
   jpa:
     properties:
       hibernate:
@@ -13,12 +13,7 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+                     
   liquibase:
     change-log: 'classpath:db/liquibase-changelog-master.xml'
     contexts: 'test-data'
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"

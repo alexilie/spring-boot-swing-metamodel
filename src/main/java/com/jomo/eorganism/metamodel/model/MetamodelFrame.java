@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
 import com.jomo.eorganism.metamodel.config.ApplicationConfiguration;
 
 public class MetamodelFrame extends JFrame {
+
     private JMenu          fileMenu;
     private JMenu          enterpriseMenu;
     private JMenu          openDBMenu;

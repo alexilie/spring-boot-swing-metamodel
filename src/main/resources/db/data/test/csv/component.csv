@@ -5,3 +5,6 @@ application_id;name;type;description
 1;ICM API;REST API;ICM REST API Component
 3;Finance API;REST API;Finance REST API Component
 3;Finance ETL;Batch;Finance Batch Component
+3;SAP CCIA;Integration;Finance SAP CC Instant Approval Component
+3;SAP Wealth;Integration;Finance SAP CC Wealth Component
+3;SAP API;Integration;Finance SAP API interface Component
